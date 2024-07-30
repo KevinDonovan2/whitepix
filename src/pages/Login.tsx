@@ -23,7 +23,7 @@ function Login() {
                     <Label htmlFor="email">Email</Label>
                     <Input id='email' type="email" placeholder="m@example.com"/>
                 </div>
-                <div>
+                <div className="flex flex-col items-start space-y-2">
                     <Label htmlFor="password">Password</Label>
                     <Input id="password" type="password" placeholder="Password"/>
                 </div>
