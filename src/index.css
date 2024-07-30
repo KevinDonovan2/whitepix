@@ -67,3 +67,23 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer base {
+  /* Path to the font file */
+  /*@font-face {*/
+  /*  font-family: "Rationale";*/
+  /*  src: url("/fonts/Rationale-Regular.ttf") format("truetype");*/
+  /*  font-weight: normal;*/
+  /*  font-style: normal;*/
+  /*}*/
+  @font-face {
+    font-family: "Poppins";
+    src: url("assets/fonts/Poppins-Light.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  html {
+    /*font-family: "Rationale", system-ui, sans-serif;*/
+    font-family: "Poppins", sans-serif;
+  }
+}
