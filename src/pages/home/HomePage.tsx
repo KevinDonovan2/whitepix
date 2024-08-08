@@ -1,10 +1,10 @@
-import NavBar from "@/layout/NavBar"
+import NavBar from '@/layout/NavBar';
 function HomePage() {
-  return (
-    <div>
-      <NavBar/>
-    </div>
-  )
+    return (
+        <div>
+            <NavBar />
+        </div>
+    );
 }
 
-export default HomePage
+export default HomePage;
