@@ -1,6 +1,9 @@
+import NavBar from "@/layout/NavBar"
 function HomePage() {
   return (
-    <div>HomePage</div>
+    <div>
+      <NavBar/>
+    </div>
   )
 }
 
