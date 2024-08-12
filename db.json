@@ -1,0 +1,54 @@
+{
+    "publications": [
+        {
+            "id": 1,
+            "user_name": "Donovan",
+            "reaction": "Like",
+            "description": "Exploring the effects of air pollution on public health.",
+            "creation_date": "2024-08-12",
+            "creation_time": "09:15",
+            "photo_url": "https://example.com/photos/publication1.jpg",
+            "comment": "Very interesting and relevant to our study."
+        },
+        {
+            "id": 2,
+            "user_name": "Marie",
+            "reaction": "Awesome",
+            "description": "Analysis of air quality trends in urban areas.",
+            "creation_date": "2024-08-11",
+            "creation_time": "14:22",
+            "photo_url": "https://example.com/photos/publication2.jpg",
+            "comment": "This is a good foundation for further research."
+        },
+        {
+            "id": 3,
+            "user_name": "Alex",
+            "reaction": "Informative",
+            "description": "The effects of greenhouse gases on global warming.",
+            "creation_date": "2024-08-10",
+            "creation_time": "11:30",
+            "photo_url": "https://example.com/photos/publication3.jpg",
+            "comment": "I appreciate the detailed charts."
+        },
+        {
+            "id": 4,
+            "user_name": "Sophie",
+            "reaction": "Inspiring",
+            "description": "Environmental policies in Europe: successes and challenges.",
+            "creation_date": "2024-08-09",
+            "creation_time": "16:45",
+            "photo_url": "https://example.com/photos/publication4.jpg",
+            "comment": "Very inspiring, it shows the importance of public policies."
+        },
+        {
+            "id": 5,
+            "user_name": "Marc",
+            "reaction": "Well noted",
+            "description": "Impact of industrial pollution on rural populations.",
+            "creation_date": "2024-08-08",
+            "creation_time": "10:05",
+            "photo_url": "https://example.com/photos/publication5.jpg",
+            "comment": "An often overlooked but crucial topic."
+        }
+    ]
+}
