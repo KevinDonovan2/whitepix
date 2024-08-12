@@ -8,6 +8,9 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Share2 } from 'lucide-react';
+import {MessageCircleMore } from 'lucide-react';
+import { ThumbsUp } from 'lucide-react';
 
 function Publication() {
     return (
@@ -41,9 +44,21 @@ function Publication() {
                 />
             </CardContent>
             <CardFooter className="flex justify-around">
-                <Button variant="ghost">Like</Button>
-                <Button variant="ghost">Comment</Button>
-                <Button variant="ghost">Share</Button>
+                <Button variant="ghost" className='border'>
+                    <div className='flex flex-row gap-2 '>
+                        <ThumbsUp />Like
+                    </div>
+                </Button>
+                <Button variant="ghost" className='border'>
+                    <div className='flex flex-row gap-2  '>
+                    <MessageCircleMore />Comment
+                    </div>
+                </Button>
+                <Button variant="ghost" className='border'>
+                    <div className='flex flex-row gap-2 '>
+                        <Share2 />Share
+                    </div>
+                </Button>
             </CardFooter>
         </Card>
     );
