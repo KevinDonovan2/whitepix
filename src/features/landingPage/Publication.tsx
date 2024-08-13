@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import axios from 'axios';
 import {
     Card,
@@ -10,10 +10,9 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Share2 } from 'lucide-react';
-import { MessageCircleMore } from 'lucide-react';
-import { ThumbsUp } from 'lucide-react';
+import { Share2, MessageCircleMore, ThumbsUp } from 'lucide-react';
 
+// Define the Publication type
 type Publication = {
     id: number;
     user_name: string;
@@ -25,33 +24,46 @@ type Publication = {
     comment: string;
 };
 
-function Publication() {
-    const [publications, setPublications] = useState<Publication[]>([]);
+// Define the type for the response data
+type FetchPublicationsResponse = Publication[];
 
-    useEffect(() => {
-        axios.get('http://localhost:8080/publications')
-            .then(response => {
-                setPublications(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching publications:', error);
-            });
-    }, []);
+// Fetch publications function
+async function fetchPublications(): Promise<FetchPublicationsResponse> {
+    const response = await axios.get('http://localhost:8080/publications');
+    return response.data;
+}
+
+function Publication() {
+    // Use the correct types for useQuery
+    const {
+        data: publications = [],
+        error,
+        isLoading
+    }: UseQueryResult<FetchPublicationsResponse> = useQuery({
+        queryKey: ['publications'],
+        queryFn: fetchPublications
+    });
+
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error fetching publications: {error.message}</div>;
 
     return (
         <div>
             {publications.map((publication) => (
-                <Card key={publication.id} className="w-full max-w-md mx-auto my-4">
+                <Card
+                    key={publication.id}
+                    className="w-full max-w-md mx-auto my-4"
+                >
                     <CardHeader className="flex items-center space-x-4">
-                        <div className='flex items-center gap-4'>
+                        <div className="flex items-center gap-4">
                             <Avatar>
                                 <AvatarImage
-                                    src= "https://via.placeholder.com/40"
+                                    src="https://via.placeholder.com/40"
                                     alt="User Avatar"
                                 />
                                 <AvatarFallback>U</AvatarFallback>
                             </Avatar>
-                            <div className='flex flex-col'>
+                            <div className="flex flex-col">
                                 <CardTitle className="text-lg font-semibold">
                                     {publication.user_name}
                                 </CardTitle>
@@ -62,9 +74,7 @@ function Publication() {
                         </div>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                        <p className="text-md">
-                            {publication.description}
-                        </p>
+                        <p className="text-md">{publication.description}</p>
                         {publication.photo_url && (
                             <img
                                 src={publication.photo_url}
@@ -74,19 +84,31 @@ function Publication() {
                         )}
                     </CardContent>
                     <CardFooter className="flex justify-around">
-                        <Button variant="ghost" className='border bg-black text-white'>
-                            <div className='flex flex-row gap-2 '>
-                                <ThumbsUp />like
+                        <Button
+                            variant="ghost"
+                            className="border bg-black text-white"
+                        >
+                            <div className="flex flex-row gap-2 ">
+                                <ThumbsUp />
+                                like
                             </div>
                         </Button>
-                        <Button variant="ghost" className='border bg-black text-white'>
-                            <div className='flex flex-row gap-2  '>
-                                <MessageCircleMore />comment
+                        <Button
+                            variant="ghost"
+                            className="border bg-black text-white"
+                        >
+                            <div className="flex flex-row gap-2  ">
+                                <MessageCircleMore />
+                                comment
                             </div>
                         </Button>
-                        <Button variant="ghost" className='border bg-black text-white'>
-                            <div className='flex flex-row gap-2 '>
-                                <Share2 />share
+                        <Button
+                            variant="ghost"
+                            className="border bg-black text-white"
+                        >
+                            <div className="flex flex-row gap-2 ">
+                                <Share2 />
+                                share
                             </div>
                         </Button>
                     </CardFooter>
