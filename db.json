@@ -7,7 +7,7 @@
             "description": "Exploring the effects of air pollution on public health.",
             "creation_date": "2024-08-12",
             "creation_time": "09:15",
-            "photo_url": "https://example.com/photos/publication1.jpg",
+            "photo_url": "https://images.unsplash.com/photo-1471107191679-f26174d2d41e?q=80&w=1373&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             "comment": "Very interesting and relevant to our study."
         },
         {
@@ -17,7 +17,7 @@
             "description": "Analysis of air quality trends in urban areas.",
             "creation_date": "2024-08-11",
             "creation_time": "14:22",
-            "photo_url": "https://example.com/photos/publication2.jpg",
+            "photo_url": "https://images.unsplash.com/photo-1639754390580-2e7437267698?q=80&w=1441&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             "comment": "This is a good foundation for further research."
         },
         {
@@ -27,7 +27,7 @@
             "description": "The effects of greenhouse gases on global warming.",
             "creation_date": "2024-08-10",
             "creation_time": "11:30",
-            "photo_url": "https://example.com/photos/publication3.jpg",
+            "photo_url": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
             "comment": "I appreciate the detailed charts."
         },
         {
@@ -37,7 +37,7 @@
             "description": "Environmental policies in Europe: successes and challenges.",
             "creation_date": "2024-08-09",
             "creation_time": "16:45",
-            "photo_url": "https://example.com/photos/publication4.jpg",
+            "photo_url": "https://images.unsplash.com/photo-1495562569060-2eec283d3391",
             "comment": "Very inspiring, it shows the importance of public policies."
         },
         {
@@ -47,7 +47,7 @@
             "description": "Impact of industrial pollution on rural populations.",
             "creation_date": "2024-08-08",
             "creation_time": "10:05",
-            "photo_url": "https://example.com/photos/publication5.jpg",
+            "photo_url": "https://images.unsplash.com/photo-1516937941344-00b4e0337589?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             "comment": "An often overlooked but crucial topic."
         }
     ]

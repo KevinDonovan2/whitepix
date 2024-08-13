@@ -2,7 +2,7 @@ import Publication from '@/features/landingPage/Publication';
 import NavBar from '@/layout/NavBar';
 function HomePage() {
     return (
-        <div>
+        <div className='bg-[#FFF1E6]'>
             <NavBar />
             <Publication />
         </div>
