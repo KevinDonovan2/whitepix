@@ -12,29 +12,25 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Share2, MessageCircleMore, ThumbsUp } from 'lucide-react';
 
-// Define the Publication type
 type Publication = {
     id: number;
     user_name: string;
     reaction: string;
     description: string;
     creation_date: string;
-    creation_time: string;
+    creation_time: number;
     photo_url?: string;
     comment: string;
 };
 
-// Define the type for the response data
 type FetchPublicationsResponse = Publication[];
 
-// Fetch publications function
 async function fetchPublications(): Promise<FetchPublicationsResponse> {
-    const response = await axios.get('http://localhost:8080/publications');
+    const response = await axios.get('http://localhost:8081/publications');
     return response.data;
 }
 
 function Publication() {
-    // Use the correct types for useQuery
     const {
         data: publications = [],
         error,

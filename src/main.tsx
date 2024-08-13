@@ -13,11 +13,11 @@ const queryClient = new QueryClient();
 // Configure les routes
 const ROUTER = createBrowserRouter([
     {
-        path: '/',
+        path: '/home',
         element: <HomePage />
     },
     {
-        path: '/login',
+        path: '/',
         element: <LoginPage />
     },
     {

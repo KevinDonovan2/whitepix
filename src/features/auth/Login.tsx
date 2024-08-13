@@ -12,22 +12,20 @@ import { Label } from '@radix-ui/react-label';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios, { AxiosError } from 'axios'; // Importer AxiosError
+import { useNavigate } from 'react-router-dom'; // Importer useNavigate pour la navigation
 
 // Définir le schéma de validation avec Zod
 const loginSchema = z.object({
     email: z.string().email({ message: 'Invalid email address' }),
     password: z
         .string()
-        .min(6, { message: 'Password must be at least 6 characters long' })
-        .regex(/[A-Z]/, {
-            message: 'Password must contain at least one uppercase letter'
-        })
-        .regex(/\d/, { message: 'Password must contain at least one number' })
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
 function Login() {
+    const navigate = useNavigate(); // Initialiser useNavigate
     const {
         register,
         handleSubmit,
@@ -36,9 +34,19 @@ function Login() {
         resolver: zodResolver(loginSchema)
     });
 
-    const onSubmit = (data: LoginFormData) => {
-        console.log('Login data:', data);
-        // Logic to handle login with the validated data
+    const onSubmit = async (data: LoginFormData) => {
+        try {
+            const response = await axios.post('http://localhost:8081/users/login', data);
+            console.log('Login successful:', response.data);
+            localStorage.setItem('token', response.data.token);
+            navigate('/home'); // Rediriger l'utilisateur vers /home
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                console.error('Login failed:', error.response?.data || error.message);
+            } else {
+                console.error('Login failed:', error);
+            }
+        }
     };
 
     return (
