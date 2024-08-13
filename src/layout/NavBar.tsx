@@ -1,7 +1,13 @@
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'; // Import Shadcn UI Avatar components
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 function NavBar() {
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        window.location.href = '/'; 
+    };
+
     return (
         <nav className="bg-gray-800 p-4">
             <div className="container mx-auto flex justify-between items-center">
@@ -12,7 +18,7 @@ function NavBar() {
                                 src="https://via.placeholder.com/150"
                                 alt="Profile"
                             />
-                            <AvatarFallback>JD</AvatarFallback>
+                            <AvatarFallback>Logo</AvatarFallback>
                         </Avatar>
                     </Button>
                 </div>
@@ -43,15 +49,30 @@ function NavBar() {
                     </a>
                 </div>
                 <div>
-                    <Button variant="ghost" className="p-0">
-                        <Avatar>
-                            <AvatarImage
-                                src="https://via.placeholder.com/150"
-                                alt="Profile"
-                            />
-                            <AvatarFallback>JD</AvatarFallback>
-                        </Avatar>
-                    </Button>
+                    <DropdownMenu.Root>
+                        <DropdownMenu.Trigger asChild>
+                            <Button variant="ghost" className="p-0">
+                                <Avatar>
+                                    <AvatarImage
+                                        src="https://via.placeholder.com/150"
+                                        alt="Profile"
+                                    />
+                                    <AvatarFallback>Profile</AvatarFallback>
+                                </Avatar>
+                            </Button>
+                        </DropdownMenu.Trigger>
+                        <DropdownMenu.Content
+                            align="end"
+                            className="bg-white text-black rounded-md shadow-lg p-2"
+                        >
+                            <DropdownMenu.Item
+                                onClick={handleLogout}
+                                className="cursor-pointer p-2 hover:bg-gray-200 rounded-md"
+                            >
+                                Logout
+                            </DropdownMenu.Item>
+                        </DropdownMenu.Content>
+                    </DropdownMenu.Root>
                 </div>
             </div>
         </nav>

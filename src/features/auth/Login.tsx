@@ -12,10 +12,9 @@ import { Label } from '@radix-ui/react-label';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios, { AxiosError } from 'axios'; // Importer AxiosError
-import { useNavigate } from 'react-router-dom'; // Importer useNavigate pour la navigation
+import axios, { AxiosError } from 'axios'; 
+import { useNavigate } from 'react-router-dom'; 
 
-// Définir le schéma de validation avec Zod
 const loginSchema = z.object({
     email: z.string().email({ message: 'Invalid email address' }),
     password: z
@@ -25,7 +24,7 @@ const loginSchema = z.object({
 type LoginFormData = z.infer<typeof loginSchema>;
 
 function Login() {
-    const navigate = useNavigate(); // Initialiser useNavigate
+    const navigate = useNavigate(); 
     const {
         register,
         handleSubmit,
@@ -39,7 +38,7 @@ function Login() {
             const response = await axios.post('http://localhost:8081/users/login', data);
             console.log('Login successful:', response.data);
             localStorage.setItem('token', response.data.token);
-            navigate('/home'); // Rediriger l'utilisateur vers /home
+            navigate('/home'); 
         } catch (error) {
             if (error instanceof AxiosError) {
                 console.error('Login failed:', error.response?.data || error.message);
@@ -47,6 +46,10 @@ function Login() {
                 console.error('Login failed:', error);
             }
         }
+    };
+
+    const handleSignUpClick = () => {
+        navigate('/signup');
     };
 
     return (
@@ -92,7 +95,7 @@ function Login() {
                     <Button className="w-full" type="submit">
                         Login
                     </Button>
-                    <Button className="w-full">Sign up</Button>
+                    <Button className="w-full" type="button" onClick={handleSignUpClick} >Sign up</Button>
                 </CardFooter>
             </form>
         </Card>
