@@ -19,9 +19,12 @@ import { useNavigate } from 'react-router-dom';
 const signUpSchema = z.object({
     name: z.string().min(1, { message: 'Name is required' }),
     email: z.string().email({ message: 'Invalid email address' }),
-    password: z.string()
+    password: z
+        .string()
         .min(6, { message: 'Password must be at least 6 characters long' })
-        .regex(/[A-Z]/, { message: 'Password must contain at least one uppercase letter' })
+        .regex(/[A-Z]/, {
+            message: 'Password must contain at least one uppercase letter'
+        })
         .regex(/[0-9]/, { message: 'Password must contain at least one digit' })
 });
 
@@ -45,10 +48,13 @@ function SignUp() {
                 password: data.password
             });
             console.log('Sign up successful:', response.data);
-            navigate('/home'); 
+            navigate('/home');
         } catch (error) {
             if (error instanceof AxiosError) {
-                console.error('Sign up failed:', error.response?.data || error.message);
+                console.error(
+                    'Sign up failed:',
+                    error.response?.data || error.message
+                );
             } else {
                 console.error('Sign up failed:', error);
             }

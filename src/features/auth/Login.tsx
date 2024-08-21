@@ -12,19 +12,18 @@ import { Label } from '@radix-ui/react-label';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios, { AxiosError } from 'axios'; 
-import { useNavigate } from 'react-router-dom'; 
+import axios, { AxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const loginSchema = z.object({
     email: z.string().email({ message: 'Invalid email address' }),
-    password: z
-        .string()
+    password: z.string()
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
 function Login() {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -35,13 +34,19 @@ function Login() {
 
     const onSubmit = async (data: LoginFormData) => {
         try {
-            const response = await axios.post('http://localhost:8081/users/login', data);
+            const response = await axios.post(
+                'http://localhost:8081/users/login',
+                data
+            );
             console.log('Login successful:', response.data);
             localStorage.setItem('token', response.data.token);
-            navigate('/home'); 
+            navigate('/home');
         } catch (error) {
             if (error instanceof AxiosError) {
-                console.error('Login failed:', error.response?.data || error.message);
+                console.error(
+                    'Login failed:',
+                    error.response?.data || error.message
+                );
             } else {
                 console.error('Login failed:', error);
             }
@@ -95,7 +100,13 @@ function Login() {
                     <Button className="w-full" type="submit">
                         Login
                     </Button>
-                    <Button className="w-full" type="button" onClick={handleSignUpClick} >Sign up</Button>
+                    <Button
+                        className="w-full"
+                        type="button"
+                        onClick={handleSignUpClick}
+                    >
+                        Sign up
+                    </Button>
                 </CardFooter>
             </form>
         </Card>

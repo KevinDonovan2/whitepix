@@ -1,0 +1,22 @@
+Home: 
+    -securiser le /home
+    -story section
+
+Publication:
+    -pop up index publication
+    -create publication section
+
+Message:
+    -message pop up (adapte code )
+
+Navbar: 
+    -change all navbar icons
+    -section notifications
+    -section add frineds
+    -section reels
+
+Profil User:
+    -modifier image, name, password
+    -add status like on publication section
+    -list own publication 
+    -list friends

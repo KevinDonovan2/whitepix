@@ -87,7 +87,10 @@
         font-family: 'Poppins', sans-serif;
     }
 }
-
+.font-ultrablack {
+    font-weight: 980;
+}
 .tsisydikiany {
-    color: rgb(39, 39, 65);
+    color: rgb(59, 102, 47);
+    background-color: #ae8fce;
 }

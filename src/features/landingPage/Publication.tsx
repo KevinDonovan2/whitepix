@@ -48,7 +48,7 @@ function Publication() {
             {publications.map((publication) => (
                 <Card
                     key={publication.id}
-                    className="w-full max-w-md mx-auto my-4"
+                    className="w-full max-w-lg mx-auto my-4"
                 >
                     <CardHeader className="flex items-center space-x-4">
                         <div className="flex items-center gap-4">
