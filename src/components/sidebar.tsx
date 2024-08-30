@@ -1,6 +1,3 @@
-'use client';
-
-import Link from 'next/link';
 import { MoreHorizontal, SquarePen } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
@@ -10,8 +7,8 @@ import {
     TooltipTrigger,
     TooltipProvider
 } from '@/components/ui/tooltip';
-import { Avatar, AvatarImage } from './ui/avatar';
-import { Message } from '@/app/data';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Message } from './chat/data';
 
 interface SidebarProps {
     isCollapsed: boolean;
@@ -19,17 +16,23 @@ interface SidebarProps {
         name: string;
         messages: Message[];
         avatar: string;
-        variant: 'grey' | 'ghost';
+        variant:
+            | 'default'
+            | 'link'
+            | 'ghost'
+            | 'destructive'
+            | 'outline'
+            | 'secondary';
     }[];
     onClick?: () => void;
     isMobile: boolean;
 }
 
-export function Sidebar({ links, isCollapsed, isMobile }: SidebarProps) {
+export function Sidebar({ links = [], isCollapsed, isMobile }: SidebarProps) {
     return (
         <div
             data-collapsed={isCollapsed}
-            className="relative group flex flex-col h-full gap-4 p-2 data-[collapsed=true]:p-2 "
+            className="relative group flex flex-col h-full gap-4 p-2 data-[collapsed=true]:p-4 min-w-[25%]"
         >
             {!isCollapsed && (
                 <div className="flex justify-between p-2 items-center">
@@ -39,7 +42,7 @@ export function Sidebar({ links, isCollapsed, isMobile }: SidebarProps) {
                     </div>
 
                     <div>
-                        <Link
+                        <a
                             href="#"
                             className={cn(
                                 buttonVariants({
@@ -50,9 +53,9 @@ export function Sidebar({ links, isCollapsed, isMobile }: SidebarProps) {
                             )}
                         >
                             <MoreHorizontal size={20} />
-                        </Link>
+                        </a>
 
-                        <Link
+                        <a
                             href="#"
                             className={cn(
                                 buttonVariants({
@@ -63,41 +66,39 @@ export function Sidebar({ links, isCollapsed, isMobile }: SidebarProps) {
                             )}
                         >
                             <SquarePen size={20} />
-                        </Link>
+                        </a>
                     </div>
                 </div>
             )}
-            <nav className="grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
+            <nav className="grid gap-4 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
                 {links.map((link, index) =>
                     isCollapsed ? (
                         <TooltipProvider key={index}>
-                            <Tooltip key={index} delayDuration={0}>
+                            <Tooltip delayDuration={0}>
                                 <TooltipTrigger asChild>
-                                    <Link
+                                    <a
                                         href="#"
                                         className={cn(
                                             buttonVariants({
                                                 variant: link.variant,
                                                 size: 'icon'
                                             }),
-                                            'h-11 w-11 md:h-16 md:w-16',
-                                            link.variant === 'grey' &&
-                                                'dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white'
+                                            'h-11 w-11 md:h-16 md:w-16'
                                         )}
                                     >
                                         <Avatar className="flex justify-center items-center">
                                             <AvatarImage
                                                 src={link.avatar}
-                                                alt={link.avatar}
+                                                alt={link.name}
                                                 width={6}
                                                 height={6}
-                                                className="w-10 h-10 "
+                                                className="w-10 h-10"
                                             />
-                                        </Avatar>{' '}
+                                        </Avatar>
                                         <span className="sr-only">
                                             {link.name}
                                         </span>
-                                    </Link>
+                                    </a>
                                 </TooltipTrigger>
                                 <TooltipContent
                                     side="right"
@@ -108,32 +109,30 @@ export function Sidebar({ links, isCollapsed, isMobile }: SidebarProps) {
                             </Tooltip>
                         </TooltipProvider>
                     ) : (
-                        <Link
+                        <a
                             key={index}
                             href="#"
                             className={cn(
                                 buttonVariants({
                                     variant: link.variant,
-                                    size: 'xl'
+                                    size: 'default'
                                 }),
-                                link.variant === 'grey' &&
-                                    'dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white shrink',
-                                'justify-start gap-4'
+                                'flex justify-start gap-4 p- '
                             )}
                         >
                             <Avatar className="flex justify-center items-center">
                                 <AvatarImage
                                     src={link.avatar}
-                                    alt={link.avatar}
+                                    alt={link.name}
                                     width={6}
                                     height={6}
-                                    className="w-10 h-10 "
+                                    className="w-10 h-10"
                                 />
                             </Avatar>
                             <div className="flex flex-col max-w-28">
                                 <span>{link.name}</span>
-                                {link.messages.length > 0 && (
-                                    <span className="text-zinc-300 text-xs truncate ">
+                                {link.messages && link.messages.length > 0 && (
+                                    <span className="text-zinc-300 text-xs truncate">
                                         {
                                             link.messages[
                                                 link.messages.length - 1
@@ -148,7 +147,7 @@ export function Sidebar({ links, isCollapsed, isMobile }: SidebarProps) {
                                     </span>
                                 )}
                             </div>
-                        </Link>
+                        </a>
                     )
                 )}
             </nav>

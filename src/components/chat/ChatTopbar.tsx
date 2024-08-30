@@ -1,8 +1,6 @@
-import React from 'react';
 import { Avatar, AvatarImage } from '../ui/avatar';
-import { UserData } from '@/app/data';
+import { UserData } from './data';
 import { Info, Phone, Video } from 'lucide-react';
-import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '../ui/button';
 
@@ -10,19 +8,16 @@ interface ChatTopbarProps {
     selectedUser: UserData;
 }
 
-export const TopbarIcons = [{ icon: Phone }, { icon: Video }, { icon: Info }];
+const topbarIcons = [{ icon: Phone }, { icon: Video }, { icon: Info }];
 
 export default function ChatTopbar({ selectedUser }: ChatTopbarProps) {
     return (
-        <div className="w-full h-20 flex p-4 justify-between items-center border-b">
+        <div className="flex items-center justify-between p-4 border-b h-20 bg-gray-300">
             <div className="flex items-center gap-2">
-                <Avatar className="flex justify-center items-center">
+                <Avatar className="w-10 h-10">
                     <AvatarImage
                         src={selectedUser.avatar}
                         alt={selectedUser.name}
-                        width={6}
-                        height={6}
-                        className="w-10 h-10 "
                     />
                 </Avatar>
                 <div className="flex flex-col">
@@ -30,23 +25,17 @@ export default function ChatTopbar({ selectedUser }: ChatTopbarProps) {
                     <span className="text-xs">Active 2 mins ago</span>
                 </div>
             </div>
-
-            <div>
-                {TopbarIcons.map((icon, index) => (
-                    <Link
+            <div className="flex gap-2">
+                {topbarIcons.map(({ icon: Icon }, index) => (
+                    <button
                         key={index}
-                        href="#"
                         className={cn(
                             buttonVariants({ variant: 'ghost', size: 'icon' }),
-                            'h-9 w-9',
-                            'dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white'
+                            'w-9 h-9'
                         )}
                     >
-                        <icon.icon
-                            size={20}
-                            className="text-muted-foreground"
-                        />
-                    </Link>
+                        <Icon size={20} />
+                    </button>
                 ))}
             </div>
         </div>

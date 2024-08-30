@@ -5,7 +5,7 @@ function HomePage() {
     return (
         <div className="bg-[rgb(39,39,65)]">
             <NavBar />
-            <CreatePublication/>
+            <CreatePublication />
             <Publication />
         </div>
     );

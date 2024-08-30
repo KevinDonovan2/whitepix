@@ -13,6 +13,11 @@ interface EmojiPickerProps {
     onChange: (value: string) => void;
 }
 
+// Définir le type pour l'objet emoji
+interface Emoji {
+    native: string;
+}
+
 export const EmojiPicker = ({ onChange }: EmojiPickerProps) => {
     return (
         <Popover>
@@ -25,7 +30,7 @@ export const EmojiPicker = ({ onChange }: EmojiPickerProps) => {
                     theme="light"
                     data={data}
                     maxFrequentRows={1}
-                    onEmojiSelect={(emoji: any) => onChange(emoji.native)}
+                    onEmojiSelect={(emoji: Emoji) => onChange(emoji.native)}
                 />
             </PopoverContent>
         </Popover>

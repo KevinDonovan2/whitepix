@@ -6,6 +6,7 @@ import LoginPage from './pages/auth/LoginPage';
 import SignUpPage from './pages/auth/SignUpPage';
 import HomePage from './pages/home/HomePage';
 import './index.css';
+import ChatPage from './pages/chat/ChatPage';
 
 // Crée une instance du QueryClient
 const queryClient = new QueryClient();
@@ -24,6 +25,10 @@ const ROUTER = createBrowserRouter([
         path: '/signup',
         element: <SignUpPage />
     },
+    {
+        path: '/chat',
+        element: <ChatPage />
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
