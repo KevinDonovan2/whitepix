@@ -1,3 +1,6 @@
+Design: 
+    -rounded all
+    -color theme 
 Home: 
     -securiser le /home
     -story section
@@ -5,10 +8,10 @@ Home:
 Publication:
     -pop up index publication
     -create publication section
+    -fix add pictures
 
 Message:
-    -message pop up (adapte code )
-
+    -add axios
 Navbar: 
     -change all navbar icons
     -section notifications

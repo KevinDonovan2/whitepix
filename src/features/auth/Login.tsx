@@ -39,7 +39,11 @@ function Login() {
                 data
             );
             console.log('Login successful:', response.data);
+
+            // Stocker le token et l'heure de connexion
             localStorage.setItem('token', response.data.token);
+            localStorage.setItem('loginTime', new Date().getTime().toString()); // Enregistre l'heure en millisecondes
+
             navigate('/home');
         } catch (error) {
             if (error instanceof AxiosError) {

@@ -5,6 +5,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 function NavBar() {
     const handleLogout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('loginTime');
         window.location.href = '/';
     };
 
