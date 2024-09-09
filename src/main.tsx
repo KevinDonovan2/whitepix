@@ -7,7 +7,8 @@ import SignUpPage from './pages/auth/SignUpPage';
 import HomePage from './pages/home/HomePage';
 import './index.css';
 import ChatPage from './pages/chat/ChatPage';
-import PrivateRoute from './features/auth/PrivateRoute'; // Import du PrivateRoute
+import PrivateRoute from './features/auth/PrivateRoute'; 
+import NotFoundPage from './pages/NotFoundPage';
 
 const queryClient = new QueryClient();
 
@@ -21,7 +22,11 @@ const ROUTER = createBrowserRouter([
         element: <SignUpPage />
     },
     {
-        element: <PrivateRoute />, // Protection des routes sécurisées
+        path: '*',
+        element: <NotFoundPage />
+    },
+    {
+        element: <PrivateRoute />, 
         children: [
             {
                 path: '/home',

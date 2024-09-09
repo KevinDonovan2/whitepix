@@ -18,7 +18,7 @@ function NavBar() {
                     <Button variant="ghost" className="p-0">
                         <Avatar>
                             <AvatarImage
-                                src="https://via.placeholder.com/150"
+                                src="/whitepix1.png"
                                 alt="Profile"
                             />
                             <AvatarFallback>Logo</AvatarFallback>
