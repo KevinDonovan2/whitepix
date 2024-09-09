@@ -14,10 +14,15 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast'; // Importer le toast
 
+// Schéma de validation Zod
 const loginSchema = z.object({
-    email: z.string().email({ message: 'Invalid email address' }),
-    password: z.string()
+    email: z
+        .string()
+        .email({ message: 'Invalid email address' }) // Message personnalisé pour l'email
+        .nonempty({ message: 'Email is required' }), // Ajouter une validation pour email vide
+    password: z.string().nonempty({ message: 'Password is required' }) // Message pour le mot de passe vide
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
@@ -27,11 +32,13 @@ function Login() {
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        formState: { errors },
+        trigger // Permet de déclencher manuellement la validation
     } = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema)
     });
 
+    // Fonction exécutée lors du clic sur le bouton de login
     const onSubmit = async (data: LoginFormData) => {
         try {
             const response = await axios.post(
@@ -44,6 +51,7 @@ function Login() {
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('loginTime', new Date().getTime().toString()); // Enregistre l'heure en millisecondes
 
+            toast.success('Login successful!'); // Message de succès
             navigate('/home');
         } catch (error) {
             if (error instanceof AxiosError) {
@@ -51,9 +59,21 @@ function Login() {
                     'Login failed:',
                     error.response?.data || error.message
                 );
+                // Afficher un message d'erreur avec toast si la requête échoue
+                toast.error('Failed to authenticate. Please check your credentials.');
             } else {
                 console.error('Login failed:', error);
+                toast.error('Something went wrong. Please try again.');
             }
+        }
+    };
+
+    // Fonction exécutée lors du clic sur le bouton
+    const handleLoginClick = async () => {
+        // Validation manuelle avant l'envoi
+        const isValid = await trigger();
+        if (!isValid) {
+            toast.error('Please fix the errors before submitting.');
         }
     };
 
@@ -101,7 +121,11 @@ function Login() {
                     </div>
                 </CardContent>
                 <CardFooter className="flex flex-col gap-4">
-                    <Button className="w-full" type="submit">
+                    <Button
+                        className="w-full"
+                        type="submit"
+                        onClick={handleLoginClick} // Déclenche la validation avant l'envoi
+                    >
                         Login
                     </Button>
                     <Button

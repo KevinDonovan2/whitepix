@@ -1,4 +1,4 @@
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { useQuery, UseQueryResult, useMutation, UseMutationResult, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import {
     Card,
@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Share2, MessageCircleMore, ThumbsUp } from 'lucide-react';
+import { Share2, MessageCircleMore, ThumbsUp, Trash2 } from 'lucide-react';
 
 type Publication = {
     id: number;
@@ -30,14 +30,23 @@ async function fetchPublications(): Promise<FetchPublicationsResponse> {
     return response.data;
 }
 
+async function deletePublication(id: number): Promise<void> {
+    await axios.delete(`http://localhost:8081/publications/${id}`);
+}
+
 function Publication() {
-    const {
-        data: publications = [],
-        error,
-        isLoading
-    }: UseQueryResult<FetchPublicationsResponse> = useQuery({
+    const queryClient = useQueryClient();
+
+    const { data: publications = [], error, isLoading }: UseQueryResult<FetchPublicationsResponse> = useQuery({
         queryKey: ['publications'],
         queryFn: fetchPublications
+    });
+
+    const deleteMutation: UseMutationResult<void, Error, number> = useMutation({
+        mutationFn: deletePublication,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['publications'] });
+        }
     });
 
     if (isLoading) return <div>Loading...</div>;
@@ -46,11 +55,8 @@ function Publication() {
     return (
         <div>
             {publications.map((publication) => (
-                <Card
-                    key={publication.id}
-                    className="w-full max-w-lg mx-auto my-4"
-                >
-                    <CardHeader className="flex items-center space-x-4">
+                <Card key={publication.id} className="w-full max-w-lg mx-auto my-4">
+                    <CardHeader className="flex flex-row items-center space-x-[60%]">
                         <div className="flex items-center gap-4">
                             <Avatar>
                                 <AvatarImage
@@ -68,6 +74,14 @@ function Publication() {
                                 </CardDescription>
                             </div>
                         </div>
+                        <Button
+                            variant="ghost"
+                            className="text-red-500"
+                            onClick={() => deleteMutation.mutate(publication.id)}
+                            disabled={deleteMutation.isPending}
+                        >
+                            <Trash2 className="w-5 h-5" />
+                        </Button>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <p className="text-md">{publication.description}</p>
