@@ -1,0 +1,52 @@
+name: CI for Vercel Deployment
+
+# Trigger the workflow on push and pull requests to the main branch
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    # Steps to configure the CI pipeline
+    steps:
+      # Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js version (you can change the version if needed)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Change to the version you're using
+
+      # Install dependencies using npm or yarn
+      - name: Install dependencies
+        run: npm install # or `yarn install`
+
+      # Run tests (optional, if you have a test suite)
+      - name: Run tests
+        run: npm run test # Make sure to add tests if they are not there
+
+      # Build the project (you might need this if you use a framework)
+      - name: Build the project
+        run: npm run build # or your specific build command
+
+  # Optional: Deploy to Vercel using a custom step
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Install Vercel CLI
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      # Deploy to Vercel
+      - name: Deploy to Vercel
+        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }} # Use your Vercel token stored in GitHub secrets
