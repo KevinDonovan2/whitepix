@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: Deploy to Vercel
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  lint_and_build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,8 +24,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run ESLint
-        run: npm run lint
-
       - name: Build the project
         run: npm run build
+
+      - name: Deploy to Vercel
+        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
