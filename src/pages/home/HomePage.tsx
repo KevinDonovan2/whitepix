@@ -51,7 +51,7 @@ function HomePage() {
     }, [navigate]);
 
     return (
-        <div className="bg-[rgb(39,39,65)]">
+        <div className="min-h-screen bg-[rgb(39,39,65)] flex flex-col justify-between">
             <NavBar />
             <CreatePublication />
             <Publication />

@@ -1,4 +1,10 @@
-import { useQuery, UseQueryResult, useMutation, UseMutationResult, useQueryClient } from '@tanstack/react-query';
+import {
+    useQuery,
+    UseQueryResult,
+    useMutation,
+    UseMutationResult,
+    useQueryClient
+} from '@tanstack/react-query';
 import axios from 'axios';
 import {
     Card,
@@ -37,7 +43,11 @@ async function deletePublication(id: number): Promise<void> {
 function Publication() {
     const queryClient = useQueryClient();
 
-    const { data: publications = [], error, isLoading }: UseQueryResult<FetchPublicationsResponse> = useQuery({
+    const {
+        data: publications = [],
+        error,
+        isLoading
+    }: UseQueryResult<FetchPublicationsResponse> = useQuery({
         queryKey: ['publications'],
         queryFn: fetchPublications
     });
@@ -55,8 +65,11 @@ function Publication() {
     return (
         <div>
             {publications.map((publication) => (
-                <Card key={publication.id} className="w-full max-w-lg mx-auto my-4">
-                    <CardHeader className="flex flex-row items-center space-x-[60%]">
+                <Card
+                    key={publication.id}
+                    className="w-full max-w-lg mx-auto my-4"
+                >
+                    <CardHeader className="flex-row items-center container flex justify-between">
                         <div className="flex items-center gap-4">
                             <Avatar>
                                 <AvatarImage
@@ -77,7 +90,9 @@ function Publication() {
                         <Button
                             variant="ghost"
                             className="text-red-500"
-                            onClick={() => deleteMutation.mutate(publication.id)}
+                            onClick={() =>
+                                deleteMutation.mutate(publication.id)
+                            }
                             disabled={deleteMutation.isPending}
                         >
                             <Trash2 className="w-5 h-5" />

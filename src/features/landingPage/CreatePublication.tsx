@@ -53,7 +53,7 @@ export default function CreatePublication() {
     };
 
     return (
-        <div className="p-4 bg-white rounded-lg shadow-md max-w-lg mx-auto">
+        <div className="p-4 bg-white rounded-lg shadow-md max-w-lg w-full mx-auto">
             <h2 className="text-lg font-semibold mb-4">Create a Publication</h2>
             <Textarea
                 placeholder="What's on your mind?"

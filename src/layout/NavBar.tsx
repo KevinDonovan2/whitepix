@@ -1,6 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { Link } from 'react-router-dom';
+import { Home, MessageCircle, Briefcase, Phone } from 'lucide-react';
 
 function NavBar() {
     const handleLogout = () => {
@@ -10,8 +12,8 @@ function NavBar() {
     };
 
     return (
-        <nav className="bg-gray-800 p-4">
-            <div className="container mx-auto flex justify-between items-center">
+        <div className="bg-white text-black p-3 m-4 rounded-2xl">
+            <div className="container flex justify-between items-center">
                 <div>
                     <Button variant="ghost" className="p-0">
                         <Avatar>
@@ -23,31 +25,35 @@ function NavBar() {
                         </Avatar>
                     </Button>
                 </div>
-                <div className="space-x-12 flex-1 flex justify-center">
-                    <a
-                        href="#"
-                        className="text-gray-300 hover:text-white border-b-2 border-transparent hover:border-white transition-all duration-300"
+                <div className="space-x-12 flex-1 flex justify-center text-sm ">
+                    <Link
+                        to="/"
+                        className="flex flex-col items-center hover:text-blue-400 border-b-2 border-transparent hover:border-blue-400 transition-all duration-300"
                     >
+                        <Home className="w-6 h-6 mb-1" />
                         Home
-                    </a>
-                    <a
-                        href="#"
-                        className="text-gray-300 hover:text-white border-b-2 border-transparent hover:border-white transition-all duration-300"
+                    </Link>
+                    <Link
+                        to="/chat"
+                        className="flex flex-col items-center hover:text-blue-400 border-b-2 border-transparent hover:border-blue-400 transition-all duration-300"
                     >
-                        About
-                    </a>
-                    <a
-                        href="#"
-                        className="text-gray-300 hover:text-white border-b-2 border-transparent hover:border-white transition-all duration-100"
+                        <MessageCircle className="w-6 h-6 mb-1" />
+                        Chat
+                    </Link>
+                    <Link
+                        to="/services"
+                        className="flex flex-col items-center hover:text-blue-400 border-b-2 border-transparent hover:border-blue-400 transition-all duration-100"
                     >
+                        <Briefcase className="w-6 h-6 mb-1" />
                         Services
-                    </a>
-                    <a
-                        href="#"
-                        className="text-gray-300 hover:text-white border-b-2 border-transparent hover:border-white transition-all duration-300"
+                    </Link>
+                    <Link
+                        to="/contact"
+                        className="flex flex-col items-center hover:text-blue-400 border-b-2 border-transparent hover:border-blue-400 transition-all duration-300"
                     >
+                        <Phone className="w-6 h-6 mb-1" />
                         Contact
-                    </a>
+                    </Link>
                 </div>
                 <div>
                     <DropdownMenu.Root>
@@ -76,7 +82,7 @@ function NavBar() {
                     </DropdownMenu.Root>
                 </div>
             </div>
-        </nav>
+        </div>
     );
 }
 

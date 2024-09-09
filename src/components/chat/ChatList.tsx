@@ -1,4 +1,3 @@
-//need to fix the scroll
 import { useRef, useEffect } from 'react';
 import { Message, UserData } from './data';
 import { Avatar, AvatarImage } from '../ui/avatar';

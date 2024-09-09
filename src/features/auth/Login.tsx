@@ -60,7 +60,9 @@ function Login() {
                     error.response?.data || error.message
                 );
                 // Afficher un message d'erreur avec toast si la requête échoue
-                toast.error('Failed to authenticate. Please check your credentials.');
+                toast.error(
+                    'Failed to authenticate. Please check your credentials.'
+                );
             } else {
                 console.error('Login failed:', error);
                 toast.error('Something went wrong. Please try again.');
