@@ -27,7 +27,7 @@ function NavBar() {
                 </div>
                 <div className="space-x-12 flex-1 flex justify-center text-sm ">
                     <Link
-                        to="/"
+                        to="/home"
                         className="flex flex-col items-center hover:text-blue-400 border-b-2 border-transparent hover:border-blue-400 transition-all duration-300"
                     >
                         <Home className="w-6 h-6 mb-1" />

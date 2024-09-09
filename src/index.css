@@ -94,3 +94,11 @@
     color: rgb(59, 102, 47);
     background-color: #ae8fce;
 }
+.hide-scrollbar {
+    overflow-y: scroll; /* Permet le défilement vertical */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Cache la barre de défilement */
+}
+

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import CreatePublication from '@/features/landingPage/CreatePublication';
 import Publication from '@/features/landingPage/Publication';
 import NavBar from '@/layout/NavBar';
+import SideRightPage from './SideRightPage';
+import SideLeftPage from './SideLeftPage';
 
 function HomePage() {
     const navigate = useNavigate();
@@ -51,12 +53,23 @@ function HomePage() {
     }, [navigate]);
 
     return (
-        <div className="min-h-screen bg-[rgb(39,39,65)] flex flex-col justify-between">
+        <div className="h-screen bg-[rgb(39,39,65)] flex flex-col">
             <NavBar />
-            <CreatePublication />
-            <Publication />
+            <div className="flex flex-1 flex-row justify-center gap-8 overflow-y-auto">
+                <div >
+                    <SideLeftPage />
+                </div>    
+                <div className='overflow-y-auto z-0 hide-scrollbar'>
+                    <CreatePublication />
+                    <Publication />
+                </div>
+                <div >
+                    <SideRightPage />
+                </div>
+            </div>
         </div>
     );
+    
 }
 
 export default HomePage;
