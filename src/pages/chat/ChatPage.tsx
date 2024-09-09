@@ -4,16 +4,16 @@ import { Sidebar } from '@/components/sidebar';
 
 export default function ChatPage() {
     const selectedUser = userData[0];
-    const messages = selectedUser.messages;
+    const messages = selectedUser.messages || [];
     const isMobile = false;
     const isCollapsed = false;
 
-    // Example links data, replace with actual data
+    // Mapping user data and ensuring the correct variant type
     const links = userData.map((user) => ({
         name: user.name,
-        messages: user.messages,
+        messages: user.messages || [],
         avatar: user.avatar,
-        variant: 'ghost' // or 'grey' based on your requirement
+        variant: 'ghost' as const // Explicitly type the variant as one of the allowed values
     }));
 
     return (

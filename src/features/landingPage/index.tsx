@@ -1,2 +1,2 @@
-export * from './publication';
+export * from './Publication';
 export * from './CreatePublication';
