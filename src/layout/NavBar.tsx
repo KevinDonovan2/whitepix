@@ -17,10 +17,7 @@ function NavBar() {
                 <div>
                     <Button variant="ghost" className="p-0">
                         <Avatar>
-                            <AvatarImage
-                                src="/whitepix1.png"
-                                alt="Profile"
-                            />
+                            <AvatarImage src="/whitepix1.png" alt="Profile" />
                             <AvatarFallback>Logo</AvatarFallback>
                         </Avatar>
                     </Button>

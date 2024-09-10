@@ -9,6 +9,7 @@
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
         "preview": "vite preview",
         "format": "prettier --write .",
+        "check-format": "prettier --check .",
         "json-server": "json-server --watch db.json --port 8080"
     },
     "dependencies": {

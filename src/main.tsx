@@ -7,7 +7,7 @@ import SignUpPage from './pages/auth/SignUpPage';
 import HomePage from './pages/home/HomePage';
 import './index.css';
 import ChatPage from './pages/chat/ChatPage';
-import PrivateRoute from './features/auth/PrivateRoute'; 
+import PrivateRoute from './features/auth/PrivateRoute';
 import NotFoundPage from './pages/NotFoundPage';
 
 const queryClient = new QueryClient();
@@ -26,7 +26,7 @@ const ROUTER = createBrowserRouter([
         element: <NotFoundPage />
     },
     {
-        element: <PrivateRoute />, 
+        element: <PrivateRoute />,
         children: [
             {
                 path: '/home',
