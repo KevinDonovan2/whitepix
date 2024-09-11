@@ -21,16 +21,14 @@ import './commands'
 
 import { mount } from 'cypress/react18'
 
-// Augment the Cypress namespace to include type definitions for
-// your custom command.
-// Alternatively, can be defined in cypress/support/component.d.ts
-// with a <reference path="./component" /> at the top of your spec.
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      mount: typeof mount
-    }
-  }
+// Augment Cypress with custom command types without using namespaces
+interface CustomCommands {
+  mount: typeof mount
+}
+
+// Merge the custom commands into Cypress’ Chainable interface
+declare module 'cypress' {
+  interface Chainable extends CustomCommands {}
 }
 
 Cypress.Commands.add('mount', mount)

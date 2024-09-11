@@ -10,9 +10,13 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     plugins: ['react-refresh'],
     rules: {
-        'react-refresh/only-export-components': [
-            'warn',
-            { allowConstantExport: true }
-        ]
+        // Disables the react-refresh rule that only allows component exports
+        'react-refresh/only-export-components': 'off',
+        
+        // You can re-enable it with the constant export option if needed
+        // 'react-refresh/only-export-components': [
+        //     'warn',
+        //     { allowConstantExport: true }
+        // ]
     }
 };

@@ -50,7 +50,7 @@ function HomePage() {
                 );
             };
         }
-    }, [navigate]);
+    }, [navigate, SESSION_TIMEOUT]); // Added SESSION_TIMEOUT to the dependency array
 
     return (
         <div className="h-screen bg-[rgb(39,39,65)] flex flex-col">
@@ -69,7 +69,6 @@ function HomePage() {
             </div>
         </div>
     );
-    
 }
 
 export default HomePage;
