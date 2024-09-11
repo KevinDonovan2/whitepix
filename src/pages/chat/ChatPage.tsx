@@ -1,4 +1,4 @@
-import { Chat } from '@/components/chat';
+import { Chat } from '@/components/chat/Chat';
 import { userData } from '@/components/chat/data';
 import { Sidebar } from '@/components/sidebar';
 
