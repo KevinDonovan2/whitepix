@@ -8,5 +8,9 @@ export default defineConfig({
         alias: {
             '@': path.resolve(__dirname, './src')
         }
+    },
+    server: {
+        port: 5173, // Assurez-vous que le port est bien défini et disponible
+        open: true  // Ouvrir automatiquement le navigateur à l'adresse spécifiée
     }
 });
