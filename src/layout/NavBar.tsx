@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
@@ -5,9 +6,18 @@ import { Link } from 'react-router-dom';
 import { Home, MessageCircle, Briefcase, Phone } from 'lucide-react';
 
 function NavBar() {
+    const [userPhoto, setUserPhoto] = useState<string | null>(null);
+
+    useEffect(() => {
+        // Récupérer la photo de l'utilisateur depuis le localStorage
+        const storedPhoto = localStorage.getItem('userPhoto');
+        setUserPhoto(storedPhoto);
+    }, []);
+
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('loginTime');
+        localStorage.removeItem('userPhoto'); // Supprimer la photo de l'utilisateur lors du logout
         window.location.href = '/';
     };
 
@@ -17,10 +27,7 @@ function NavBar() {
                 <div>
                     <Button variant="ghost" className="p-0">
                         <Avatar>
-                            <AvatarImage
-                                src="/whitepix1.png"
-                                alt="Profile"
-                            />
+                            <AvatarImage src="/whitepix1.png" alt="Logo" />
                             <AvatarFallback>Logo</AvatarFallback>
                         </Avatar>
                     </Button>
@@ -60,8 +67,12 @@ function NavBar() {
                         <DropdownMenu.Trigger asChild>
                             <Button variant="ghost" className="p-0">
                                 <Avatar>
+                                    {/* Afficher la photo de l'utilisateur ou une image par défaut */}
                                     <AvatarImage
-                                        src="https://via.placeholder.com/150"
+                                        src={
+                                            userPhoto ||
+                                            'https://via.placeholder.com/150'
+                                        }
                                         alt="Profile"
                                     />
                                     <AvatarFallback>Profile</AvatarFallback>

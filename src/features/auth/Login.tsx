@@ -47,11 +47,12 @@ function Login() {
             );
             console.log('Login successful:', response.data);
 
-            // Stocker le token et l'heure de connexion
+            // Stocker le token, l'heure de connexion et la photo de l'utilisateur
             localStorage.setItem('token', response.data.token);
-            localStorage.setItem('loginTime', new Date().getTime().toString()); // Enregistre l'heure en millisecondes
+            localStorage.setItem('loginTime', new Date().getTime().toString());
+            localStorage.setItem('userPhoto', response.data.user.photo); // Stocker la photo de l'utilisateur
 
-            toast.success('Login successful!'); // Message de succès
+            toast.success('Login successful!');
             navigate('/home');
         } catch (error) {
             if (error instanceof AxiosError) {
@@ -59,7 +60,6 @@ function Login() {
                     'Login failed:',
                     error.response?.data || error.message
                 );
-                // Afficher un message d'erreur avec toast si la requête échoue
                 toast.error(
                     'Failed to authenticate. Please check your credentials.'
                 );

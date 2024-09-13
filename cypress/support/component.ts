@@ -14,24 +14,24 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-import { mount } from 'cypress/react18'
+import { mount } from 'cypress/react18';
 
 // Augment Cypress with custom command types without using namespaces
 interface CustomCommands {
-  mount: typeof mount
+    mount: typeof mount;
 }
 
 // Merge the custom commands into Cypress’ Chainable interface
 declare module 'cypress' {
-  interface Chainable extends CustomCommands {}
+    interface Chainable extends CustomCommands {}
 }
 
-Cypress.Commands.add('mount', mount)
+Cypress.Commands.add('mount', mount);
 
 // Example use:
 // cy.mount(<MyComponent />)

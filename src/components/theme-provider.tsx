@@ -15,10 +15,11 @@ type ThemeProviderState = {
 
 const initialState: ThemeProviderState = {
     theme: 'system',
-    setTheme: () => null,
+    setTheme: () => null
 };
 
-export const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
+export const ThemeProviderContext =
+    createContext<ThemeProviderState>(initialState);
 
 export const ThemeProvider = ({
     children,

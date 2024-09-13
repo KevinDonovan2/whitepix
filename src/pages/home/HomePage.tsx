@@ -56,14 +56,14 @@ function HomePage() {
         <div className="h-screen bg-[rgb(39,39,65)] flex flex-col">
             <NavBar />
             <div className="flex flex-1 flex-row justify-center gap-8 overflow-y-auto">
-                <div >
+                <div>
                     <SideLeftPage />
-                </div>    
-                <div className='overflow-y-auto z-0 hide-scrollbar'>
+                </div>
+                <div className="overflow-y-auto z-0 hide-scrollbar">
                     <CreatePublication />
                     <Publication />
                 </div>
-                <div >
+                <div>
                     <SideRightPage />
                 </div>
             </div>

@@ -121,7 +121,7 @@ function SignUp() {
                     <Button
                         className="w-full"
                         type="button"
-                        onClick={() => navigate('/')} 
+                        onClick={() => navigate('/')}
                     >
                         Login
                     </Button>
