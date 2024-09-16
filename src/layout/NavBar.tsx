@@ -9,7 +9,6 @@ function NavBar() {
     const [userPhoto, setUserPhoto] = useState<string | null>(null);
 
     useEffect(() => {
-        // Récupérer la photo de l'utilisateur depuis le localStorage
         const storedPhoto = localStorage.getItem('userPhoto');
         setUserPhoto(storedPhoto);
     }, []);
@@ -17,19 +16,27 @@ function NavBar() {
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('loginTime');
-        localStorage.removeItem('userPhoto'); // Supprimer la photo de l'utilisateur lors du logout
+        localStorage.removeItem('userPhoto'); 
         window.location.href = '/';
     };
 
     return (
-        <div className="bg-white text-black p-3 m-4 rounded-2xl">
-            <div className="container flex justify-between items-center">
+        <div className="secondary text-black p-3 mt-4 ml-4 mr-4 rounded-2xl ">
+            <div className="container flex justify-between ">
                 <div>
                     <Button variant="ghost" className="p-0">
                         <Avatar>
                             <AvatarImage src="/whitepix1.png" alt="Logo" />
                             <AvatarFallback>Logo</AvatarFallback>
                         </Avatar>
+                        <div className='ml-4 font-bold text-lg'>
+                            <span className='text-slate-500'>
+                                WHITE
+                            </span>
+                            <span className='text-green-700'>
+                                PIX
+                            </span>
+                        </div>
                     </Button>
                 </div>
                 <div className="space-x-12 flex-1 flex justify-center text-sm ">
@@ -52,7 +59,7 @@ function NavBar() {
                         className="flex flex-col items-center hover:text-blue-400 border-b-2 border-transparent hover:border-blue-400 transition-all duration-100"
                     >
                         <Briefcase className="w-6 h-6 mb-1" />
-                        Services
+                        People
                     </Link>
                     <Link
                         to="/contact"

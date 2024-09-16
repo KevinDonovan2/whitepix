@@ -50,6 +50,7 @@ function Login() {
             // Stocker le token, l'heure de connexion et la photo de l'utilisateur
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('loginTime', new Date().getTime().toString());
+            localStorage.setItem('userName', response.data.user.name);
             localStorage.setItem('userPhoto', response.data.user.photo); // Stocker la photo de l'utilisateur
 
             toast.success('Login successful!');

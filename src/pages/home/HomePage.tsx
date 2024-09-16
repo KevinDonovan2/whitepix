@@ -53,13 +53,13 @@ function HomePage() {
     }, [navigate, SESSION_TIMEOUT]); // Added SESSION_TIMEOUT to the dependency array
 
     return (
-        <div className="h-screen bg-[rgb(39,39,65)] flex flex-col">
+        <div className="h-screen primary flex flex-col">
             <NavBar />
-            <div className="flex flex-1 flex-row justify-center gap-8 overflow-y-auto">
+            <div className="flex flex-1 flex-row justify-center gap-8 overflow-y-auto p-6">
                 <div>
                     <SideLeftPage />
                 </div>
-                <div className="overflow-y-auto z-0 hide-scrollbar">
+                <div className="overflow-y-auto z-0 hide-scrollbar w-[50vw] ">
                     <CreatePublication />
                     <Publication />
                 </div>
