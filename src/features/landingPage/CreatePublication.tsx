@@ -19,13 +19,13 @@ type Publication = {
 export default function CreatePublication() {
     const [description, setDescription] = useState<string>('');
     const [photo_url, setPhotoUrl] = useState<string>('');
-    const [userName, setUserName] = useState<string | null>(null);
+    const [userName, setUserName] = useState<string | undefined>(undefined);
     const queryClient = useQueryClient();
 
     useEffect(() => {
-        const storedName = localStorage.getItem('userName');
+        const storedName = localStorage.getItem('userName') || undefined;
         setUserName(storedName);
-    });
+    }, []);    
 
     const mutation = useMutation({
         mutationFn: async (newPublication: Partial<Publication>) => {

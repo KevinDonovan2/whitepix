@@ -1,15 +1,10 @@
-import {
-    Card,
-    CardContent,
-} from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 
 export default function SideLeftPage() {
     return (
         <Card className="w-[25vw] h-[100%]">
             <CardContent className="grid gap-4 pt-4">
-                <div>
-
-                </div>
+                <div></div>
             </CardContent>
         </Card>
     );

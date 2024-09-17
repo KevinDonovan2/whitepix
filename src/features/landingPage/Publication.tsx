@@ -65,10 +65,7 @@ function Publication() {
     return (
         <div>
             {publications.map((publication) => (
-                <Card
-                    key={publication.id}
-                    className="mx-auto my-4 secondary"
-                >
+                <Card key={publication.id} className="mx-auto my-4 secondary">
                     <CardHeader className="flex-row items-center container flex justify-between">
                         <div className="flex items-center gap-4">
                             <Avatar>
@@ -81,7 +78,7 @@ function Publication() {
                                 </CardTitle>
                                 <CardDescription className="text-sm text-muted-foreground flex flex-row gap-2">
                                     <div>{publication.creation_time}</div>
-                                    <div>{publication.creation_date}</div> 
+                                    <div>{publication.creation_date}</div>
                                 </CardDescription>
                             </div>
                         </div>
