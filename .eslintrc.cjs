@@ -11,8 +11,8 @@ module.exports = {
     plugins: ['react-refresh'],
     rules: {
         // Disables the react-refresh rule that only allows component exports
-        'react-refresh/only-export-components': 'off',
-        
+        'react-refresh/only-export-components': 'off'
+
         // You can re-enable it with the constant export option if needed
         // 'react-refresh/only-export-components': [
         //     'warn',

@@ -1,28 +1,36 @@
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { Link } from 'react-router-dom';
-import { Home, MessageCircle, Briefcase, Phone } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom'; // Importer useNavigate pour la redirection
+import { Home, MessageCircle, Phone, Users } from 'lucide-react';
 
 function NavBar() {
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('loginTime');
-        window.location.href = '/';
+    const [userPhoto, setUserPhoto] = useState<string | null>(null);
+    const navigate = useNavigate(); // Utilisation de useNavigate pour la redirection
+
+    useEffect(() => {
+        const storedPhoto = localStorage.getItem('userPhoto');
+        setUserPhoto(storedPhoto);
+    }, []);
+
+    // Fonction pour rediriger vers la page des utilisateurs
+    const handleProfileClick = () => {
+        navigate('/users'); // Rediriger vers la page users
     };
 
     return (
-        <div className="bg-white text-black p-3 m-4 rounded-2xl">
-            <div className="container flex justify-between items-center">
+        <div className="secondary text-black p-3 mt-4 ml-4 mr-4 rounded-2xl ">
+            <div className="container flex justify-between ">
                 <div>
                     <Button variant="ghost" className="p-0">
                         <Avatar>
-                            <AvatarImage
-                                src="/whitepix1.png"
-                                alt="Profile"
-                            />
+                            <AvatarImage src="/whitepix1.png" alt="Logo" />
                             <AvatarFallback>Logo</AvatarFallback>
                         </Avatar>
+                        <div className="ml-4 font-bold text-lg">
+                            <span className="text-slate-500">WHITE</span>
+                            <span className="text-green-700">PIX</span>
+                        </div>
                     </Button>
                 </div>
                 <div className="space-x-12 flex-1 flex justify-center text-sm ">
@@ -44,8 +52,8 @@ function NavBar() {
                         to="/services"
                         className="flex flex-col items-center hover:text-blue-400 border-b-2 border-transparent hover:border-blue-400 transition-all duration-100"
                     >
-                        <Briefcase className="w-6 h-6 mb-1" />
-                        Services
+                        <Users className="w-6 h-6 mb-1" />
+                        People
                     </Link>
                     <Link
                         to="/contact"
@@ -56,30 +64,16 @@ function NavBar() {
                     </Link>
                 </div>
                 <div>
-                    <DropdownMenu.Root>
-                        <DropdownMenu.Trigger asChild>
-                            <Button variant="ghost" className="p-0">
-                                <Avatar>
-                                    <AvatarImage
-                                        src="https://via.placeholder.com/150"
-                                        alt="Profile"
-                                    />
-                                    <AvatarFallback>Profile</AvatarFallback>
-                                </Avatar>
-                            </Button>
-                        </DropdownMenu.Trigger>
-                        <DropdownMenu.Content
-                            align="end"
-                            className="bg-white text-black rounded-md shadow-lg p-2"
-                        >
-                            <DropdownMenu.Item
-                                onClick={handleLogout}
-                                className="cursor-pointer p-2 hover:bg-gray-200 rounded-md"
-                            >
-                                Logout
-                            </DropdownMenu.Item>
-                        </DropdownMenu.Content>
-                    </DropdownMenu.Root>
+                    {/* Bouton pour afficher la photo de l'utilisateur, redirection vers /users */}
+                    <Button variant="ghost" className="p-0" onClick={handleProfileClick}>
+                        <Avatar>
+                            <AvatarImage
+                                src={userPhoto || 'https://via.placeholder.com/150'}
+                                alt="Profile"
+                            />
+                            <AvatarFallback>Profile</AvatarFallback>
+                        </Avatar>
+                    </Button>
                 </div>
             </div>
         </div>

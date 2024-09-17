@@ -1,10 +1,8 @@
-import { Bell, Check } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Bell } from 'lucide-react';
 import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle
 } from '@/components/ui/card';
@@ -27,7 +25,7 @@ const notifications = [
 
 export default function SideRightPage() {
     return (
-        <Card className="w-[100%]">
+        <Card className="w-[25vw] h-[100%]">
             <CardHeader>
                 <CardTitle>Notifications</CardTitle>
                 <CardDescription>You have 3 unread messages.</CardDescription>
@@ -64,12 +62,6 @@ export default function SideRightPage() {
                     ))}
                 </div>
             </CardContent>
-            <CardFooter>
-                <Button className="w-full">
-                    <Check className="mr-2 h-4 w-4" /> {/* Icone Check */}
-                    Mark all as read
-                </Button>
-            </CardFooter>
         </Card>
     );
 }

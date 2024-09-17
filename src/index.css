@@ -101,4 +101,19 @@
 .hide-scrollbar::-webkit-scrollbar {
     display: none; /* Cache la barre de défilement */
 }
-
+.primary {
+    background-color: rgb(235, 235, 235);
+}
+.secondary {
+    background-color: white;
+}
+.third {
+    background-color: #4a7766;
+    color: #ece7e2;
+}
+.user-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}

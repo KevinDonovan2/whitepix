@@ -34,3 +34,7 @@ export function Chat({ messages, selectedUser, isMobile }: ChatProps) {
         </div>
     );
 }
+
+//fix user use localStorage for send message
+// other user for receve message
+// List of user for message (pour l'instant ' select * from user ')

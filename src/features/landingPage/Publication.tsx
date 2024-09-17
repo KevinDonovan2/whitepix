@@ -65,25 +65,20 @@ function Publication() {
     return (
         <div>
             {publications.map((publication) => (
-                <Card
-                    key={publication.id}
-                    className="w-full max-w-lg mx-auto my-4"
-                >
+                <Card key={publication.id} className="mx-auto my-4 secondary">
                     <CardHeader className="flex-row items-center container flex justify-between">
                         <div className="flex items-center gap-4">
                             <Avatar>
-                                <AvatarImage
-                                    src="https://via.placeholder.com/40"
-                                    alt="User Avatar"
-                                />
+                                <AvatarImage src="" alt="Profile" />
                                 <AvatarFallback>U</AvatarFallback>
                             </Avatar>
                             <div className="flex flex-col">
                                 <CardTitle className="text-lg font-semibold">
                                     {publication.user_name}
                                 </CardTitle>
-                                <CardDescription className="text-sm text-muted-foreground">
-                                    {publication.creation_time}
+                                <CardDescription className="text-sm text-muted-foreground flex flex-row gap-2">
+                                    <div>{publication.creation_time}</div>
+                                    <div>{publication.creation_date}</div>
                                 </CardDescription>
                             </div>
                         </div>
@@ -103,7 +98,7 @@ function Publication() {
                         {publication.photo_url && (
                             <img
                                 src={publication.photo_url}
-                                alt="Post Content"
+                                alt="image"
                                 className="rounded-md w-full"
                             />
                         )}
@@ -111,7 +106,7 @@ function Publication() {
                     <CardFooter className="flex justify-around">
                         <Button
                             variant="ghost"
-                            className="border bg-black text-white"
+                            className="border third text-white"
                         >
                             <div className="flex flex-row gap-2 ">
                                 <ThumbsUp />
@@ -120,7 +115,7 @@ function Publication() {
                         </Button>
                         <Button
                             variant="ghost"
-                            className="border bg-black text-white"
+                            className="border third text-white"
                         >
                             <div className="flex flex-row gap-2  ">
                                 <MessageCircleMore />
@@ -129,7 +124,7 @@ function Publication() {
                         </Button>
                         <Button
                             variant="ghost"
-                            className="border bg-black text-white"
+                            className="border third text-white"
                         >
                             <div className="flex flex-row gap-2 ">
                                 <Share2 />
@@ -144,3 +139,10 @@ function Publication() {
 }
 
 export default Publication;
+
+/* condition (si l'utilisateur n'ajoute pas d'image publication.photo_url alors ajoute
+une bg-image au descripation et met le description en caractere grand et gras)*/
+
+//le photo de profile de l'user utiliser users.name
+
+// image envoyer
