@@ -12,7 +12,7 @@ const topbarIcons = [{ icon: Phone }, { icon: Video }, { icon: Info }];
 
 export default function ChatTopbar({ selectedUser }: ChatTopbarProps) {
     return (
-        <div className="flex items-center justify-between p-4 border-b h-20 bg-gray-300">
+        <div className="flex items-center justify-between p-4 border-b h-15 bg-gray-300 rounded-tr-lg">
             <div className="flex items-center gap-2">
                 <Avatar className="w-10 h-10">
                     <AvatarImage

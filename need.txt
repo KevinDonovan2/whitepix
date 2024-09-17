@@ -1,17 +1,13 @@
-Design: 
-    -rounded all
-    -color theme 
-Home: 
-    -securiser le /home
-    -story section
+Signup:
+    -with accounts mail
+    -phone number with message confirmation
 
 Publication:
-    -pop up index publication
-    -create publication section
     -fix add pictures
 
 Message:
     -add axios
+
 Navbar: 
     -change all navbar icons
     -section notifications

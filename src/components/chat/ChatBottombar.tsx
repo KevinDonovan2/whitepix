@@ -33,7 +33,7 @@ export default function ChatBottombar({
     };
 
     return (
-        <div className="flex items-center p-2 gap-2 bg-gray-200 ">
+        <div className="flex items-center p-2 gap-2 bg-gray-300 rounded-br-lg">
             <Popover>
                 <PopoverTrigger asChild>
                     <button

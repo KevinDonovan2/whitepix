@@ -1,6 +1,7 @@
 import { Chat } from '@/components/chat/Chat';
 import { userData } from '@/components/chat/data';
 import { Sidebar } from '@/components/sidebar';
+import NavBar from '@/layout/NavBar';
 
 export default function ChatPage() {
     const selectedUser = userData[0];
@@ -17,17 +18,22 @@ export default function ChatPage() {
     }));
 
     return (
-        <div className="flex flex-row">
-            <Sidebar
-                links={links}
-                isCollapsed={isCollapsed}
-                isMobile={isMobile}
-            />
-            <Chat
-                messages={messages}
-                selectedUser={selectedUser}
-                isMobile={isMobile}
-            />
+        <div className='flex flex-col primary h-screen'>
+            <div>
+                <NavBar/>
+            </div>
+            <div className="flex flex-row justify-center bg-white rounded-2xl m-4 ">
+                <Sidebar
+                    links={links}
+                    isCollapsed={isCollapsed}
+                    isMobile={isMobile}
+                    />
+                <Chat
+                    messages={messages}
+                    selectedUser={selectedUser}
+                    isMobile={isMobile}
+                />
+            </div>
         </div>
     );
 }
