@@ -1,5 +1,5 @@
-import NavBar from "@/layout/NavBar";
-import ChatTest from "./ChatTest";
+import NavBar from '@/layout/NavBar';
+import ChatTest from './ChatTest';
 
 export default function ChatPage() {
     return (
@@ -8,7 +8,7 @@ export default function ChatPage() {
                 <NavBar />
             </div>
             <div className="rounded-2xl m-4 ">
-                <ChatTest/>
+                <ChatTest />
             </div>
         </div>
     );

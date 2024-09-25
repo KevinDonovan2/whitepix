@@ -113,7 +113,8 @@ export default function ChatBottombar({
                     onClick={() =>
                         sendMessage({
                             id: Date.now(),
-                            user_id_source: localStorage.getItem('userId') || '',
+                            user_id_source:
+                                localStorage.getItem('userId') || '',
                             user_id_destinataire: 'destination_user_id', // remplace par la vraie valeur
                             message: '👍',
                             created_at: new Date().toISOString()

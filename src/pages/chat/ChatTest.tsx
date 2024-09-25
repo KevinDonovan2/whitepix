@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 import ChatBottombar from '@/components/chat/ChatBottombar';
@@ -27,11 +27,14 @@ const ChatTest: React.FC = () => {
     const [selectedUser, setSelectedUser] = useState<User | null>(null); // Nouvel état pour l'utilisateur sélectionné
     const userId1 = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
-    const axiosConfig = {
+    
+    // Utilisation de useMemo pour mémoriser axiosConfig
+    const axiosConfig = useMemo(() => ({
         headers: {
             Authorization: `Bearer ${token}`
         }
-    };
+    }), [token]);  // axiosConfig dépend du token
+
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -45,10 +48,13 @@ const ChatTest: React.FC = () => {
                     setUsers(filteredUsers);
                 })
                 .catch((error) =>
-                    console.error('Erreur lors de la récupération des utilisateurs:', error)
+                    console.error(
+                        'Erreur lors de la récupération des utilisateurs:',
+                        error
+                    )
                 );
         }
-    }, [token, userId1]);
+    }, [token, userId1, axiosConfig]);  // Ajout de axiosConfig
 
     useEffect(() => {
         if (userId2 && token) {
@@ -59,12 +65,15 @@ const ChatTest: React.FC = () => {
                 })
                 .then((response) => setMessages(response.data))
                 .catch((error) =>
-                    console.error('Erreur lors du chargement des messages:', error)
+                    console.error(
+                        'Erreur lors du chargement des messages:',
+                        error
+                    )
                 );
 
             socket.emit('joinConversation', { userId1, userId2 });
         }
-    }, [userId1, userId2, token]);
+    }, [userId1, userId2, token, axiosConfig]);  // Ajout de axiosConfig
 
     useEffect(() => {
         socket.on('receiveMessage', (message: Message) => {
@@ -135,7 +144,8 @@ const ChatTest: React.FC = () => {
             </div>
 
             <div className="flex-grow flex flex-col rounded-r-lg">
-                {selectedUser && <ChatTopbar selectedUser={selectedUser} />} {/* Affichage du ChatTopbar */}
+                {selectedUser && <ChatTopbar selectedUser={selectedUser} />}{' '}
+                {/* Affichage du ChatTopbar */}
                 <div className="flex-grow overflow-y-auto bg-red-200 p-4 shadow-lg">
                     {messages.map((msg) => (
                         <div
@@ -164,16 +174,22 @@ const ChatTest: React.FC = () => {
                             >
                                 <p>{msg.message}</p>
                                 <span className="text-xs text-gray-500">
-                                    {new Date(msg.created_at).toLocaleTimeString()}
+                                    {new Date(
+                                        msg.created_at
+                                    ).toLocaleTimeString()}
                                 </span>
                             </div>
                             {msg.user_id_source === userId1 && (
                                 <img
                                     src={
-                                        users.find((user) => user.id === userId2)?.photo
+                                        users.find(
+                                            (user) => user.id === userId2
+                                        )?.photo
                                     }
                                     alt={
-                                        users.find((user) => user.id === userId2)?.name
+                                        users.find(
+                                            (user) => user.id === userId2
+                                        )?.name
                                     }
                                     className="w-8 h-8 rounded-full ml-2"
                                 />

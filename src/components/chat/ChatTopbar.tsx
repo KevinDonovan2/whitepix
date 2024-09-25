@@ -18,7 +18,11 @@ const topbarIcons = [{ icon: Phone }, { icon: Video }, { icon: Info }];
 
 const ChatTopbar: React.FC<ChatTopbarProps> = ({ selectedUser }) => {
     if (!selectedUser) {
-        return <div className="h-20 bg-gray-300 p-4 flex items-center justify-center">Sélectionnez un utilisateur pour démarrer une conversation</div>;
+        return (
+            <div className="h-20 bg-gray-300 p-4 flex items-center justify-center">
+                Sélectionnez un utilisateur pour démarrer une conversation
+            </div>
+        );
     }
 
     return (
