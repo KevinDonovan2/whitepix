@@ -47,11 +47,12 @@ function Login() {
             );
             console.log('Login successful:', response.data);
 
-            // Stocker le token, l'heure de connexion et la photo de l'utilisateur
+            // Stocker le token, l'heure de connexion, le nom, la photo et l'ID de l'utilisateur
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('loginTime', new Date().getTime().toString());
             localStorage.setItem('userName', response.data.user.name);
             localStorage.setItem('userPhoto', response.data.user.photo); // Stocker la photo de l'utilisateur
+            localStorage.setItem('userId', response.data.user.id); // Stocker l'ID de l'utilisateur
 
             toast.success('Login successful!');
             navigate('/home');
@@ -85,7 +86,7 @@ function Login() {
     };
 
     return (
-        <Card className="w-[350px]">
+        <Card className="w-[350px] shadow-xl">
             <CardHeader>
                 <CardTitle>Login</CardTitle>
                 <CardDescription>This is a basic login page</CardDescription>
@@ -123,21 +124,28 @@ function Login() {
                         </div>
                     </div>
                 </CardContent>
-                <CardFooter className="flex flex-col gap-4">
+                <CardFooter className="flex flex-col gap-4 ">
                     <Button
-                        className="w-full"
+                        className="w-full font-bold"
                         type="submit"
                         onClick={handleLoginClick} // Déclenche la validation avant l'envoi
                     >
                         Login
                     </Button>
                     <Button
-                        className="w-full"
+                        className="w-full font-bold"
                         type="button"
                         onClick={handleSignUpClick}
                     >
-                        Sign up
+                        Sign up with Google
                     </Button>
+                    <div>
+                        Need an account? Create one
+                        <a href="/signup" className="text-blue-500">
+                            {' '}
+                            sign up
+                        </a>
+                    </div>
                 </CardFooter>
             </form>
         </Card>
