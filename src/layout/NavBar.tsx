@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Link, useNavigate } from 'react-router-dom'; // Importer useNavigate pour la redirection
-import { Home, MessageCircle, Phone, Users } from 'lucide-react';
-
+import { Home, MessageCircle, Phone, Users, Bell } from 'lucide-react';
 function NavBar() {
     const [userPhoto, setUserPhoto] = useState<string | null>(null);
     const navigate = useNavigate(); // Utilisation de useNavigate pour la redirection
@@ -18,11 +17,19 @@ function NavBar() {
         navigate('/users'); // Rediriger vers la page users
     };
 
+    const handleHome = () => {
+        navigate('/home');
+    };
+
     return (
-        <div className="secondary text-black p-3 mt-4 ml-4 mr-4 rounded-2xl ">
+        <div className="secondary text-black p-3 mt-4 ml-4 mr-4 rounded-2xl shadow-lg">
             <div className="container flex justify-between ">
                 <div>
-                    <Button variant="ghost" className="p-0">
+                    <Button
+                        variant="ghost"
+                        className="p-0 flex flex-row items-center"
+                        onClick={handleHome}
+                    >
                         <Avatar>
                             <AvatarImage src="/whitepix1.png" alt="Logo" />
                             <AvatarFallback>Logo</AvatarFallback>
@@ -49,7 +56,7 @@ function NavBar() {
                         Chat
                     </Link>
                     <Link
-                        to="/services"
+                        to="/friends"
                         className="flex flex-col items-center hover:text-blue-400 border-b-2 border-transparent hover:border-blue-400 transition-all duration-100"
                     >
                         <Users className="w-6 h-6 mb-1" />
@@ -63,12 +70,25 @@ function NavBar() {
                         Contact
                     </Link>
                 </div>
-                <div>
-                    {/* Bouton pour afficher la photo de l'utilisateur, redirection vers /users */}
-                    <Button variant="ghost" className="p-0" onClick={handleProfileClick}>
+                <div className="flex flex-row gap-6 items-center ">
+                    <Button
+                        variant="ghost"
+                        className="p-0"
+                        onClick={handleProfileClick}
+                    >
+                        <Bell />
+                    </Button>
+                    <Button
+                        variant="ghost"
+                        className=""
+                        onClick={handleProfileClick}
+                    >
                         <Avatar>
                             <AvatarImage
-                                src={userPhoto || 'https://via.placeholder.com/150'}
+                                src={
+                                    userPhoto ||
+                                    'https://via.placeholder.com/150'
+                                }
                                 alt="Profile"
                             />
                             <AvatarFallback>Profile</AvatarFallback>

@@ -1,10 +1,17 @@
 import { useState, useRef } from 'react';
-import { Message, loggedInUserData } from './data';
 import { EmojiPicker } from '../emoji-picker';
 import { PlusCircle, SendHorizontal, ThumbsUp } from 'lucide-react';
 import { buttonVariants } from '../ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { cn } from '@/lib/utils';
+
+interface Message {
+    id: number;
+    user_id_source: string;
+    user_id_destinataire: string;
+    message: string;
+    created_at: string;
+}
 
 interface ChatBottombarProps {
     sendMessage: (newMessage: Message) => void;
@@ -22,9 +29,10 @@ export default function ChatBottombar({
         if (message.trim()) {
             const newMessage: Message = {
                 id: Date.now(),
-                name: loggedInUserData.name,
-                avatar: loggedInUserData.avatar,
-                message: message.trim()
+                user_id_source: localStorage.getItem('userId') || '',
+                user_id_destinataire: 'destination_user_id', // remplace par la vraie valeur
+                message: message.trim(),
+                created_at: new Date().toISOString()
             };
             sendMessage(newMessage);
             setMessage('');
@@ -33,7 +41,7 @@ export default function ChatBottombar({
     };
 
     return (
-        <div className="flex items-center p-2 gap-2 bg-gray-200 ">
+        <div className="flex items-center p-2 gap-2 bg-gray-200 rounded-b-lg ">
             <Popover>
                 <PopoverTrigger asChild>
                     <button
@@ -77,7 +85,7 @@ export default function ChatBottombar({
                         }
                     }}
                     placeholder="your text here..."
-                    className="w-full border rounded-full p-2 bg-background h-10" // Adjust the height here
+                    className="w-full border rounded-full p-2 bg-background h-10"
                 />
                 <div className="absolute right-2 bottom-1">
                     <EmojiPicker
@@ -105,9 +113,11 @@ export default function ChatBottombar({
                     onClick={() =>
                         sendMessage({
                             id: Date.now(),
-                            name: loggedInUserData.name,
-                            avatar: loggedInUserData.avatar,
-                            message: '👍'
+                            user_id_source:
+                                localStorage.getItem('userId') || '',
+                            user_id_destinataire: 'destination_user_id', // remplace par la vraie valeur
+                            message: '👍',
+                            created_at: new Date().toISOString()
                         })
                     }
                 >

@@ -1,22 +1,36 @@
+import React from 'react';
 import { Avatar, AvatarImage } from '../ui/avatar';
-import { UserData } from './data';
 import { Info, Phone, Video } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '../ui/button';
 
+interface User {
+    id: string;
+    name: string;
+    photo: string;
+}
+
 interface ChatTopbarProps {
-    selectedUser: UserData;
+    selectedUser: User | null; // Peut être null si aucun utilisateur n'est sélectionné
 }
 
 const topbarIcons = [{ icon: Phone }, { icon: Video }, { icon: Info }];
 
-export default function ChatTopbar({ selectedUser }: ChatTopbarProps) {
+const ChatTopbar: React.FC<ChatTopbarProps> = ({ selectedUser }) => {
+    if (!selectedUser) {
+        return (
+            <div className="h-20 bg-gray-300 p-4 flex items-center justify-center">
+                Sélectionnez un utilisateur pour démarrer une conversation
+            </div>
+        );
+    }
+
     return (
-        <div className="flex items-center justify-between p-4 border-b h-20 bg-gray-300">
+        <div className="flex items-center justify-between p-4 border-b rounded-tr-lg h-20 bg-gray-300">
             <div className="flex items-center gap-2">
                 <Avatar className="w-10 h-10">
                     <AvatarImage
-                        src={selectedUser.avatar}
+                        src={selectedUser.photo}
                         alt={selectedUser.name}
                     />
                 </Avatar>
@@ -40,4 +54,6 @@ export default function ChatTopbar({ selectedUser }: ChatTopbarProps) {
             </div>
         </div>
     );
-}
+};
+
+export default ChatTopbar;

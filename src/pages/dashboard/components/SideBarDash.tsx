@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { User, ChevronLeft, LogOut, Settings } from 'lucide-react';
 import { useDrawer } from '../../../context/DrawerContext';
 
-export default function SideBar() {
+export default function SideBarDash() {
     const { open, setOpen } = useDrawer();
     const navigate = useNavigate();
 
@@ -43,7 +43,7 @@ export default function SideBar() {
                             {open && <span>Setting</span>}
                         </button>
                     </li>
-                    <div >
+                    <div>
                         <button
                             className="flex items-center gap-4 text-white w-full"
                             onClick={handleLogout}

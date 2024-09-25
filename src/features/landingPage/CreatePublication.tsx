@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Send } from 'lucide-react';
+import { Send, ImageDown, File } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 type Publication = {
@@ -25,7 +25,7 @@ export default function CreatePublication() {
     useEffect(() => {
         const storedName = localStorage.getItem('userName') || undefined;
         setUserName(storedName);
-    }, []);    
+    }, []);
 
     const mutation = useMutation({
         mutationFn: async (newPublication: Partial<Publication>) => {
@@ -59,7 +59,7 @@ export default function CreatePublication() {
     };
 
     return (
-        <div className="p-4 bg-white rounded-lg shadow-md mx-auto secondary ">
+        <div className="p-4 bg-white rounded-lg shadow-md mx-auto secondary shadow-lg ">
             <h2 className="text-lg font-semibold mb-4">Create a Publication</h2>
             <Textarea
                 placeholder="What's on your mind?"
@@ -67,13 +67,23 @@ export default function CreatePublication() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
             />
-            <Button
-                onClick={handleSubmit}
-                className="flex items-center gap-2 third"
-            >
-                <Send className="w-4 h-4" />
-                Post
-            </Button>
+            <div className="flex flex-row gap-4">
+                <Button
+                    onClick={handleSubmit}
+                    className="flex items-center gap-2 third"
+                >
+                    <Send className="w-4 h-4" />
+                    Post
+                </Button>
+                <Button className="flex items-center gap-2 third">
+                    <ImageDown className="w-4 h-4" />
+                    upload image
+                </Button>
+                <Button className="flex items-center gap-2 third">
+                    <File className="w-4 h-4" />
+                    upload file
+                </Button>
+            </div>
         </div>
     );
 }

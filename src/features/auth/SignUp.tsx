@@ -14,7 +14,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+// add section gender , vie social (etudiant ou worker), phone number(avec message de confirmation : pas obli)
 // Définir le schéma de validation avec Zod
 const signUpSchema = z.object({
     name: z.string().min(1, { message: 'Name is required' }),
@@ -62,7 +62,7 @@ function SignUp() {
     };
 
     return (
-        <Card className="w-[350px]">
+        <Card className="w-[350px] shadow-xl">
             <CardHeader>
                 <CardTitle>Sign up</CardTitle>
                 <CardDescription>This is a basic sign up page</CardDescription>
@@ -115,16 +115,15 @@ function SignUp() {
                     </div>
                 </CardContent>
                 <CardFooter className="flex flex-col gap-4">
-                    <Button className="w-full" type="submit">
+                    <Button className="w-full font-bold" type="submit">
                         Sign up
                     </Button>
-                    <Button
-                        className="w-full"
-                        type="button"
-                        onClick={() => navigate('/')}
-                    >
-                        Login
-                    </Button>
+                    <div>
+                        Have an account?{' '}
+                        <a href="/" className="text-blue-500">
+                            Login
+                        </a>
+                    </div>
                 </CardFooter>
             </form>
         </Card>
