@@ -10,6 +10,8 @@ import PrivateRoute from './features/auth/PrivateRoute';
 import NotFoundPage from './pages/NotFoundPage';
 import Dashboard from './pages/dashboard/Dashboard';
 import ChatPage from './pages/chat/ChatPage';
+import ContactPage from './pages/contact/ContactPage';
+import FriendPage from './pages/friend/FriendPage';
 
 const queryClient = new QueryClient();
 
@@ -17,6 +19,14 @@ const ROUTER = createBrowserRouter([
     {
         path: '/',
         element: <LoginPage />
+    },
+    {
+        path: '/contact',
+        element: <ContactPage />
+    },
+    {
+        path: '/friends',
+        element: <FriendPage />
     },
     {
         path: '/signup',

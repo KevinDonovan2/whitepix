@@ -27,13 +27,16 @@ const ChatTest: React.FC = () => {
     const [selectedUser, setSelectedUser] = useState<User | null>(null); // Nouvel état pour l'utilisateur sélectionné
     const userId1 = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
-    
+
     // Utilisation de useMemo pour mémoriser axiosConfig
-    const axiosConfig = useMemo(() => ({
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }), [token]);  // axiosConfig dépend du token
+    const axiosConfig = useMemo(
+        () => ({
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }),
+        [token]
+    ); // axiosConfig dépend du token
 
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -54,7 +57,7 @@ const ChatTest: React.FC = () => {
                     )
                 );
         }
-    }, [token, userId1, axiosConfig]);  // Ajout de axiosConfig
+    }, [token, userId1, axiosConfig]);
 
     useEffect(() => {
         if (userId2 && token) {
@@ -73,7 +76,7 @@ const ChatTest: React.FC = () => {
 
             socket.emit('joinConversation', { userId1, userId2 });
         }
-    }, [userId1, userId2, token, axiosConfig]);  // Ajout de axiosConfig
+    }, [userId1, userId2, token, axiosConfig]);
 
     useEffect(() => {
         socket.on('receiveMessage', (message: Message) => {
@@ -118,7 +121,7 @@ const ChatTest: React.FC = () => {
         setUserId2(userId);
         setMessages([]);
         const selected = users.find((user) => user.id === userId) || null;
-        setSelectedUser(selected); // Stocker l'utilisateur sélectionné
+        setSelectedUser(selected);
     };
 
     return (
