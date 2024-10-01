@@ -127,7 +127,7 @@ const ChatTest: React.FC = () => {
     return (
         <div className="flex h-[80vh]">
             <div className="w-1/4 bg-white p-4 rounded-l-lg">
-                <h2 className="text-lg font-semibold mb-4">Utilisateurs</h2>
+                <h2 className="text-lg font-semibold mb-4">Users</h2>
                 <ul className="flex flex-col gap-2">
                     {users.map((user) => (
                         <li

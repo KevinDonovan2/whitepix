@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { User, ChevronLeft, LogOut, Settings } from 'lucide-react';
+import { User, ChevronLeft, LogOut, Settings, ArrowLeft } from 'lucide-react';
 import { useDrawer } from '../../../context/DrawerContext';
 
 export default function SideBarDash() {
@@ -41,6 +41,15 @@ export default function SideBarDash() {
                         >
                             <Settings className="w-6 h-6" />
                             {open && <span>Setting</span>}
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            className="flex items-center gap-4 text-white w-full"
+                            onClick={() => navigate('/home')}
+                        >
+                            <ArrowLeft className="w-6 h-6" />
+                            {open && <span>Back Home</span>}
                         </button>
                     </li>
                     <div>

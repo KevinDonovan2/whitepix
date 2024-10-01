@@ -9,10 +9,14 @@ export default function FriendPage() {
             <div>
                 <NavBar />
             </div>
-            <div className="rounded-2xl m-4 ">
-                <Card className="w-full flex flex-row gap-4">
+            <div className="rounded-2xl m-4">
+                {/* Définir la hauteur maximale de la carte et permettre le défilement */}
+                <Card className="w-full flex flex-row gap-4 h-[80vh] overflow-hidden">
                     <SideBarFriend />
-                    <Friend />
+                    {/* Ajouter overflow-auto pour permettre le défilement si nécessaire */}
+                    <div className="w-full h-full overflow-auto bg-gray-300">
+                        <Friend />
+                    </div>
                 </Card>
             </div>
         </div>

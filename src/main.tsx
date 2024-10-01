@@ -21,14 +21,6 @@ const ROUTER = createBrowserRouter([
         element: <LoginPage />
     },
     {
-        path: '/contact',
-        element: <ContactPage />
-    },
-    {
-        path: '/friends',
-        element: <FriendPage />
-    },
-    {
         path: '/signup',
         element: <SignUpPage />
     },
@@ -37,7 +29,6 @@ const ROUTER = createBrowserRouter([
         element: <NotFoundPage />
     },
     {
-        //ajouter ici une dynamisme au url , ajouter l'id et nom de l'utilisateur.
         element: <PrivateRoute />,
         children: [
             {
@@ -51,6 +42,14 @@ const ROUTER = createBrowserRouter([
             {
                 path: '/users',
                 element: <Dashboard />
+            },
+            {
+                path: '/friends',
+                element: <FriendPage />
+            },
+            {
+                path: '/contact',
+                element: <ContactPage />
             }
         ]
     }
