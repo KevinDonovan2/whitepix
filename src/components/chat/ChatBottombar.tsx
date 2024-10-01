@@ -30,7 +30,7 @@ export default function ChatBottombar({
             const newMessage: Message = {
                 id: Date.now(),
                 user_id_source: localStorage.getItem('userId') || '',
-                user_id_destinataire: 'destination_user_id', // remplace par la vraie valeur
+                user_id_destinataire: 'destination_user_id',
                 message: message.trim(),
                 created_at: new Date().toISOString()
             };
@@ -115,7 +115,7 @@ export default function ChatBottombar({
                             id: Date.now(),
                             user_id_source:
                                 localStorage.getItem('userId') || '',
-                            user_id_destinataire: 'destination_user_id', // remplace par la vraie valeur
+                            user_id_destinataire: 'destination_user_id',
                             message: '👍',
                             created_at: new Date().toISOString()
                         })

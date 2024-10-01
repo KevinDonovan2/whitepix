@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 import ChatBottombar from '@/components/chat/ChatBottombar';
-import ChatTopbar from '@/components/chat/ChatTopbar'; // Importation du ChatTopbar
+import ChatTopbar from '@/components/chat/ChatTopbar';
 
 const socket = io('http://localhost:8081');
 
@@ -24,11 +24,10 @@ const ChatTest: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [users, setUsers] = useState<User[]>([]);
     const [userId2, setUserId2] = useState<string | null>(null);
-    const [selectedUser, setSelectedUser] = useState<User | null>(null); // Nouvel état pour l'utilisateur sélectionné
+    const [selectedUser, setSelectedUser] = useState<User | null>(null);
     const userId1 = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
 
-    // Utilisation de useMemo pour mémoriser axiosConfig
     const axiosConfig = useMemo(
         () => ({
             headers: {

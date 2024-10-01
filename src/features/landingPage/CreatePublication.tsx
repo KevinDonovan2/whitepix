@@ -35,7 +35,6 @@ export default function CreatePublication() {
             );
         },
         onSuccess: () => {
-            // Invalide les publications existantes pour déclencher un refetch
             queryClient.invalidateQueries({
                 queryKey: ['publications']
             });

@@ -6,7 +6,6 @@ export default function SideBarDash() {
     const { open, setOpen } = useDrawer();
     const navigate = useNavigate();
 
-    // Fonction de déconnexion
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('loginTime');

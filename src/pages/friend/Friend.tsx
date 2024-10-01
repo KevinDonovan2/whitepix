@@ -13,8 +13,6 @@ interface User {
 export default function Friend() {
     const [users, setUsers] = useState<User[]>([]);
     const token = localStorage.getItem('token');
-
-    // Configuration d'axios pour inclure le token dans les en-têtes
     const axiosConfig = useMemo(
         () => ({
             headers: {
@@ -29,7 +27,7 @@ export default function Friend() {
             axios
                 .get('http://localhost:8081/users', axiosConfig)
                 .then((response) => {
-                    setUsers(response.data); // Suppose que l'API renvoie la liste des utilisateurs
+                    setUsers(response.data);
                 })
                 .catch((error) => {
                     console.error(

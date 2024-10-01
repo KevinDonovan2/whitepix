@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-// Défini le type pour le contexte
 interface DrawerContextType {
     open: boolean;
     setOpen: (open: boolean) => void;
@@ -16,7 +15,6 @@ export const useDrawer = () => {
     return context;
 };
 
-// Typage de la propriété children
 interface DrawerProviderProps {
     children: ReactNode;
 }

@@ -144,5 +144,3 @@ export default Publication;
 une bg-image au descripation et met le description en caractere grand et gras)*/
 
 //le photo de profile de l'user utiliser users.name
-
-// image envoyer

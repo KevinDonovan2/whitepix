@@ -11,7 +11,7 @@ interface User {
 }
 
 interface ChatTopbarProps {
-    selectedUser: User | null; // Peut être null si aucun utilisateur n'est sélectionné
+    selectedUser: User | null;
 }
 
 const topbarIcons = [{ icon: Phone }, { icon: Video }, { icon: Info }];

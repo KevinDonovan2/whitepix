@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Link, useNavigate } from 'react-router-dom'; // Importer useNavigate pour la redirection
+import { Link, useNavigate } from 'react-router-dom';
 import { Home, MessageCircle, Phone, Users, Bell } from 'lucide-react';
 function NavBar() {
     const [userPhoto, setUserPhoto] = useState<string | null>(null);
-    const navigate = useNavigate(); // Utilisation de useNavigate pour la redirection
+    const navigate = useNavigate();
 
     useEffect(() => {
         const storedPhoto = localStorage.getItem('userPhoto');
         setUserPhoto(storedPhoto);
     }, []);
 
-    // Fonction pour rediriger vers la page des utilisateurs
     const handleProfileClick = () => {
-        navigate('/users'); // Rediriger vers la page users
+        navigate('/users');
     };
 
     const handleHome = () => {

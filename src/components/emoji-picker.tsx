@@ -13,7 +13,6 @@ interface EmojiPickerProps {
     onChange: (value: string) => void;
 }
 
-// Définir le type pour l'objet emoji
 interface Emoji {
     native: string;
 }

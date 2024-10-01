@@ -1,5 +1,5 @@
 import DashBar from './components/DashBar';
-import { DrawerProvider } from '../../context/DrawerContext'; // Import DrawerProvider
+import { DrawerProvider } from '../../context/DrawerContext';
 import SideBarDash from './components/SideBarDash';
 
 function Dashboard() {
@@ -10,7 +10,7 @@ function Dashboard() {
                 <SideBarDash />
                 <div className="ml-[50%] mt-[150px]">hello word</div>
             </div>
-        </DrawerProvider> // Closing tag for DrawerProvider
+        </DrawerProvider>
     );
 }
 
