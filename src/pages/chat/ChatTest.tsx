@@ -135,7 +135,7 @@ const ChatTest: React.FC = () => {
                             onClick={() => selectUser(user.id)}
                         >
                             <img
-                                src={user.photo}
+                                src={user.photo || 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'}
                                 alt={user.name}
                                 className="w-10 h-10 rounded-full mr-3"
                             />
