@@ -1,20 +1,23 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Link, useNavigate } from 'react-router-dom'; // Importer useNavigate pour la redirection
+import { Link, useNavigate } from 'react-router-dom';
 import { Home, MessageCircle, Phone, Users, Bell } from 'lucide-react';
+
 function NavBar() {
     const [userPhoto, setUserPhoto] = useState<string | null>(null);
-    const navigate = useNavigate(); // Utilisation de useNavigate pour la redirection
+    const navigate = useNavigate();
 
     useEffect(() => {
         const storedPhoto = localStorage.getItem('userPhoto');
-        setUserPhoto(storedPhoto);
+        if (storedPhoto && storedPhoto !== 'null') {
+            setUserPhoto(storedPhoto);
+        } else {
+            setUserPhoto(null);
+        }
     }, []);
 
-    // Fonction pour rediriger vers la page des utilisateurs
     const handleProfileClick = () => {
-        navigate('/users'); // Rediriger vers la page users
+        navigate('/users');
     };
 
     const handleHome = () => {
@@ -30,17 +33,18 @@ function NavBar() {
                         className="p-0 flex flex-row items-center"
                         onClick={handleHome}
                     >
-                        <Avatar>
-                            <AvatarImage src="/whitepix1.png" alt="Logo" />
-                            <AvatarFallback>Logo</AvatarFallback>
-                        </Avatar>
+                        <img
+                            src="/whitepix1.png"
+                            alt="Logo"
+                            className="h-10 w-10 rounded-full"
+                        />
                         <div className="ml-4 font-bold text-lg">
                             <span className="text-slate-500">WHITE</span>
                             <span className="text-green-700">PIX</span>
                         </div>
                     </Button>
                 </div>
-                <div className="space-x-12 flex-1 flex justify-center text-sm ">
+                <div className="space-x-12 flex-1 flex justify-center text-sm font-semibold ">
                     <Link
                         to="/home"
                         className="flex flex-col items-center hover:text-blue-400 border-b-2 border-transparent hover:border-blue-400 transition-all duration-300"
@@ -83,16 +87,14 @@ function NavBar() {
                         className=""
                         onClick={handleProfileClick}
                     >
-                        <Avatar>
-                            <AvatarImage
-                                src={
-                                    userPhoto ||
-                                    'https://via.placeholder.com/150'
-                                }
-                                alt="Profile"
-                            />
-                            <AvatarFallback>Profile</AvatarFallback>
-                        </Avatar>
+                        <img
+                            src={
+                                userPhoto ||
+                                'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
+                            }
+                            alt="Profile"
+                            className="h-10 w-10 rounded-full"
+                        />
                     </Button>
                 </div>
             </div>

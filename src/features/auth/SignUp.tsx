@@ -14,8 +14,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
-// add section gender , vie social (etudiant ou worker), phone number(avec message de confirmation : pas obli)
-// Définir le schéma de validation avec Zod
+
 const signUpSchema = z.object({
     name: z.string().min(1, { message: 'Name is required' }),
     email: z.string().email({ message: 'Invalid email address' }),

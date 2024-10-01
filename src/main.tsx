@@ -10,6 +10,8 @@ import PrivateRoute from './features/auth/PrivateRoute';
 import NotFoundPage from './pages/NotFoundPage';
 import Dashboard from './pages/dashboard/Dashboard';
 import ChatPage from './pages/chat/ChatPage';
+import ContactPage from './pages/contact/ContactPage';
+import FriendPage from './pages/friend/FriendPage';
 
 const queryClient = new QueryClient();
 
@@ -27,7 +29,6 @@ const ROUTER = createBrowserRouter([
         element: <NotFoundPage />
     },
     {
-        //ajouter ici une dynamisme au url , ajouter l'id et nom de l'utilisateur.
         element: <PrivateRoute />,
         children: [
             {
@@ -41,6 +42,14 @@ const ROUTER = createBrowserRouter([
             {
                 path: '/users',
                 element: <Dashboard />
+            },
+            {
+                path: '/friends',
+                element: <FriendPage />
+            },
+            {
+                path: '/contact',
+                element: <ContactPage />
             }
         ]
     }

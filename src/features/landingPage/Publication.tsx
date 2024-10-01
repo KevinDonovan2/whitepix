@@ -20,7 +20,9 @@ import { Share2, MessageCircleMore, ThumbsUp, Trash2 } from 'lucide-react';
 
 type Publication = {
     id: number;
+    user_id: number;
     user_name: string;
+    user_photo?: string;
     reaction: string;
     description: string;
     creation_date: string;
@@ -69,7 +71,14 @@ function Publication() {
                     <CardHeader className="flex-row items-center container flex justify-between">
                         <div className="flex items-center gap-4">
                             <Avatar>
-                                <AvatarImage src="" alt="Profile" />
+                                <AvatarImage
+                                    src={
+                                        publication.user_photo
+                                            ? publication.user_photo
+                                            : 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
+                                    }
+                                    alt="Profile"
+                                />
                                 <AvatarFallback>U</AvatarFallback>
                             </Avatar>
                             <div className="flex flex-col">
@@ -98,7 +107,7 @@ function Publication() {
                         {publication.photo_url && (
                             <img
                                 src={publication.photo_url}
-                                alt="image"
+                                alt="Publication"
                                 className="rounded-md w-full"
                             />
                         )}
@@ -139,10 +148,3 @@ function Publication() {
 }
 
 export default Publication;
-
-/* condition (si l'utilisateur n'ajoute pas d'image publication.photo_url alors ajoute
-une bg-image au descripation et met le description en caractere grand et gras)*/
-
-//le photo de profile de l'user utiliser users.name
-
-// image envoyer

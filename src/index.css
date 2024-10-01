@@ -95,11 +95,11 @@
     background-color: #ae8fce;
 }
 .hide-scrollbar {
-    overflow-y: scroll; /* Permet le défilement vertical */
+    overflow-y: scroll;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-    display: none; /* Cache la barre de défilement */
+    display: none;
 }
 .primary {
     background-color: rgb(235, 235, 235);

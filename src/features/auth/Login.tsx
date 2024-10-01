@@ -14,15 +14,14 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast'; // Importer le toast
+import { toast } from 'react-hot-toast';
 
-// Schéma de validation Zod
 const loginSchema = z.object({
     email: z
         .string()
-        .email({ message: 'Invalid email address' }) // Message personnalisé pour l'email
-        .nonempty({ message: 'Email is required' }), // Ajouter une validation pour email vide
-    password: z.string().nonempty({ message: 'Password is required' }) // Message pour le mot de passe vide
+        .email({ message: 'Invalid email address' })
+        .nonempty({ message: 'Email is required' }),
+    password: z.string().nonempty({ message: 'Password is required' })
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
@@ -38,7 +37,6 @@ function Login() {
         resolver: zodResolver(loginSchema)
     });
 
-    // Fonction exécutée lors du clic sur le bouton de login
     const onSubmit = async (data: LoginFormData) => {
         try {
             const response = await axios.post(
@@ -47,12 +45,11 @@ function Login() {
             );
             console.log('Login successful:', response.data);
 
-            // Stocker le token, l'heure de connexion, le nom, la photo et l'ID de l'utilisateur
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('loginTime', new Date().getTime().toString());
             localStorage.setItem('userName', response.data.user.name);
-            localStorage.setItem('userPhoto', response.data.user.photo); // Stocker la photo de l'utilisateur
-            localStorage.setItem('userId', response.data.user.id); // Stocker l'ID de l'utilisateur
+            localStorage.setItem('userPhoto', response.data.user.photo);
+            localStorage.setItem('userId', response.data.user.id);
 
             toast.success('Login successful!');
             navigate('/home');
@@ -72,9 +69,7 @@ function Login() {
         }
     };
 
-    // Fonction exécutée lors du clic sur le bouton
     const handleLoginClick = async () => {
-        // Validation manuelle avant l'envoi
         const isValid = await trigger();
         if (!isValid) {
             toast.error('Please fix the errors before submitting.');
@@ -128,7 +123,7 @@ function Login() {
                     <Button
                         className="w-full font-bold"
                         type="submit"
-                        onClick={handleLoginClick} // Déclenche la validation avant l'envoi
+                        onClick={handleLoginClick}
                     >
                         Login
                     </Button>
