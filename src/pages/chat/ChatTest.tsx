@@ -4,6 +4,26 @@ import { io } from 'socket.io-client';
 import ChatBottombar from '@/components/chat/ChatBottombar';
 import ChatTopbar from '@/components/chat/ChatTopbar';
 
+// Custom hook to determine if the device is mobile
+const useIsMobile = () => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768); // Example breakpoint for mobile
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Check on mount
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    return isMobile;
+};
+
 const socket = io('http://localhost:8081');
 
 interface Message {
@@ -35,9 +55,12 @@ const ChatTest: React.FC = () => {
             }
         }),
         [token]
-    ); // axiosConfig dépend du token
+    );
 
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+    // Use the isMobile hook
+    const isMobile = useIsMobile();
 
     useEffect(() => {
         if (token) {
@@ -100,12 +123,25 @@ const ChatTest: React.FC = () => {
     const sendMessage = (newMessage: Message) => {
         if (!newMessage.message || !userId2) return;
 
+        // Create a new message object
         const messageData = {
             userIdSource: userId1,
             userIdDestinataire: userId2,
             message: newMessage.message
         };
 
+        // Add the new message to local state immediately
+        const tempMessage: Message = {
+            id: Date.now(), // Temporary ID
+            user_id_source: userId1!,
+            user_id_destinataire: userId2,
+            message: newMessage.message,
+            created_at: new Date().toISOString() // Use current time
+        };
+
+        setMessages((prevMessages) => [...prevMessages, tempMessage]); // Update local state
+
+        // Send message to server
         axios
             .post('http://localhost:8081/messages', messageData, axiosConfig)
             .then((response) => {
@@ -135,7 +171,10 @@ const ChatTest: React.FC = () => {
                             onClick={() => selectUser(user.id)}
                         >
                             <img
-                                src={user.photo || 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'}
+                                src={
+                                    user.photo ||
+                                    'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
+                                }
                                 alt={user.name}
                                 className="w-10 h-10 rounded-full mr-3"
                             />
@@ -146,21 +185,21 @@ const ChatTest: React.FC = () => {
             </div>
 
             <div className="flex-grow flex flex-col rounded-r-lg">
-                {selectedUser && <ChatTopbar selectedUser={selectedUser} />}{' '}
-                {/* Affichage du ChatTopbar */}
+                {selectedUser && <ChatTopbar selectedUser={selectedUser} />}
                 <div className="flex-grow overflow-y-auto bg-red-200 p-4 shadow-lg">
                     {messages.map((msg) => (
                         <div
                             key={msg.id}
                             className={`flex items-start gap-2 p-2 ${msg.user_id_source === userId2 ? 'justify-start' : 'justify-end'}`}
                         >
-                            {msg.user_id_source !== userId1 && (
+                            {msg.user_id_source == userId2 && (
                                 <img
                                     src={
                                         users.find(
                                             (user) =>
                                                 user.id === msg.user_id_source
-                                        )?.photo
+                                        )?.photo ||
+                                        'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
                                     }
                                     alt={
                                         users.find(
@@ -172,7 +211,7 @@ const ChatTest: React.FC = () => {
                                 />
                             )}
                             <div
-                                className={`p-2 rounded-lg ${msg.user_id_source === userId2 ? 'bg-blue-200 text-right' : 'bg-gray-200 text-left'}`}
+                                className={`p-2 max-w-80 rounded-lg ${msg.user_id_source === userId2 ? 'bg-blue-200 text-right' : 'bg-gray-200 text-left'}`}
                             >
                                 <p>{msg.message}</p>
                                 <span className="text-xs text-gray-500">
@@ -181,26 +220,12 @@ const ChatTest: React.FC = () => {
                                     ).toLocaleTimeString()}
                                 </span>
                             </div>
-                            {msg.user_id_source === userId1 && (
-                                <img
-                                    src={
-                                        users.find(
-                                            (user) => user.id === userId2
-                                        )?.photo
-                                    }
-                                    alt={
-                                        users.find(
-                                            (user) => user.id === userId2
-                                        )?.name
-                                    }
-                                    className="w-8 h-8 rounded-full ml-2"
-                                />
-                            )}
                         </div>
                     ))}
                     <div ref={messagesEndRef} />
                 </div>
-                <ChatBottombar sendMessage={sendMessage} isMobile={false} />
+
+                <ChatBottombar sendMessage={sendMessage} isMobile={isMobile} />
             </div>
         </div>
     );

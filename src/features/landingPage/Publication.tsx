@@ -20,14 +20,14 @@ import { Share2, MessageCircleMore, ThumbsUp, Trash2 } from 'lucide-react';
 
 type Publication = {
     id: number;
-    user_id: number;  
+    user_id: number;
     user_name: string;
-    user_photo?: string; // Image de profil de l'utilisateur
+    user_photo?: string;
     reaction: string;
     description: string;
     creation_date: string;
     creation_time: number;
-    photo_url?: string; // Image liée à la publication
+    photo_url?: string;
     comment: string;
 };
 
@@ -71,9 +71,13 @@ function Publication() {
                     <CardHeader className="flex-row items-center container flex justify-between">
                         <div className="flex items-center gap-4">
                             <Avatar>
-                                <AvatarImage 
-                                    src={publication.user_photo ? publication.user_photo : 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'}
-                                    alt="Profile" 
+                                <AvatarImage
+                                    src={
+                                        publication.user_photo
+                                            ? publication.user_photo
+                                            : 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
+                                    }
+                                    alt="Profile"
                                 />
                                 <AvatarFallback>U</AvatarFallback>
                             </Avatar>

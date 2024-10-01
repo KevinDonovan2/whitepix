@@ -30,7 +30,10 @@ const ChatTopbar: React.FC<ChatTopbarProps> = ({ selectedUser }) => {
             <div className="flex items-center gap-2">
                 <Avatar className="w-10 h-10">
                     <AvatarImage
-                        src={selectedUser.photo}
+                        src={
+                            selectedUser.photo ||
+                            'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
+                        }
                         alt={selectedUser.name}
                     />
                 </Avatar>

@@ -56,7 +56,10 @@ export default function Friend() {
                             <div className="flex flex-col items-center">
                                 <Avatar className="w-full h-full overflow-hidden">
                                     <img
-                                        src={user.photo || 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'}
+                                        src={
+                                            user.photo ||
+                                            'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
+                                        }
                                         alt={`${user.name} photo`}
                                         className="w-full h-full object-cover rounded-t-lg"
                                     />

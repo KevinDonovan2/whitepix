@@ -1,4 +1,8 @@
-import { useMutation, useQueryClient, UseMutationResult } from '@tanstack/react-query';
+import {
+    useMutation,
+    useQueryClient,
+    UseMutationResult
+} from '@tanstack/react-query';
 import axios, { AxiosResponse } from 'axios';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -31,21 +35,27 @@ export default function CreatePublication() {
         setUserId(storedId ? parseInt(storedId) : undefined);
     }, []);
 
-    // Remplacement de `AxiosResponse<any, any>` par `AxiosResponse<Publication>`
-    const mutation: UseMutationResult<AxiosResponse<Publication>, Error, Partial<Publication>> = useMutation({
+    const mutation: UseMutationResult<
+        AxiosResponse<Publication>,
+        Error,
+        Partial<Publication>
+    > = useMutation({
         mutationFn: async (newPublication: Partial<Publication>) => {
-            return axios.post<Publication>('http://localhost:8081/publications', newPublication);
+            return axios.post<Publication>(
+                'http://localhost:8081/publications',
+                newPublication
+            );
         },
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ['publications'],
+                queryKey: ['publications']
             });
             setDescription('');
             setPhotoUrl('');
         },
         onError: (error) => {
             console.error('Error creating publication:', error);
-        },
+        }
     });
 
     const handleSubmit = () => {
@@ -62,7 +72,7 @@ export default function CreatePublication() {
             creation_date: new Date().toISOString().split('T')[0],
             creation_time: new Date().toLocaleTimeString(),
             photo_url,
-            comment: '',
+            comment: ''
         };
 
         mutation.mutate(newPublication);
