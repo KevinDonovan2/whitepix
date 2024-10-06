@@ -7,7 +7,7 @@ export default function ContactPage() {
             <div>
                 <NavBar />
             </div>
-            <div className="rounded-2xl m-4 ">
+            <div className="rounded-2xl m-4 flex flex-row">
                 <Contact />
             </div>
         </div>

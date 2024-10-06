@@ -1,5 +1,5 @@
 import { ModeToggle } from '../../components/mode-toggle';
-import SignUp from '@/features/auth/SignUp';
+import SignUp from './components/SignUp';
 import { ThemeProvider } from '@/components/theme-provider';
 
 function SignUpPage() {

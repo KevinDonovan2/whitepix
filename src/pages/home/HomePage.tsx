@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CreatePublication from '@/features/landingPage/CreatePublication';
-import Publication from '@/features/landingPage/Publication';
+import CreatePublication from './components/CreatePublication';
+import Publication from './components/Publication';
 import NavBar from '@/layout/NavBar';
 import SideRightPage from './SideRightPage';
 import SideLeftPage from './SideLeftPage';

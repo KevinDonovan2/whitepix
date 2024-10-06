@@ -1,5 +1,5 @@
 import { ModeToggle } from '../../components/mode-toggle';
-import Login from '@/features/auth/Login';
+import Login from './components/Login';
 import { ThemeProvider } from '@/components/theme-provider';
 
 function LoginPage() {
