@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, {
+    useState,
+    useEffect,
+    useRef,
+    useMemo,
+    useCallback
+} from 'react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 import ChatBottombar from '@/components/chat/ChatBottombar';
@@ -62,6 +68,39 @@ const ChatTest: React.FC = () => {
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const isMobile = useIsMobile();
 
+    const updateLastMessages = useCallback(
+        (newMessages: Message[]) => {
+            const lastMessageMap: { [key: string]: Message } = {
+                ...lastMessages
+            };
+
+            newMessages.forEach((msg) => {
+                const userId =
+                    msg.user_id_source === userId1
+                        ? msg.user_id_destinataire
+                        : msg.user_id_source;
+                lastMessageMap[userId] = msg;
+            });
+
+            setLastMessages(lastMessageMap);
+        },
+        [lastMessages, userId1]
+    );
+
+    const updateLastMessage = useCallback(
+        (message: Message) => {
+            const userId =
+                message.user_id_source === userId1
+                    ? message.user_id_destinataire
+                    : message.user_id_source;
+            setLastMessages((prevLastMessages) => ({
+                ...prevLastMessages,
+                [userId]: message
+            }));
+        },
+        [userId1]
+    );
+
     useEffect(() => {
         if (token) {
             axios
@@ -104,7 +143,7 @@ const ChatTest: React.FC = () => {
 
             socket.emit('joinConversation', { userId1, userId2 });
         }
-    }, [userId1, userId2, token, axiosConfig]);
+    }, [userId1, userId2, token, axiosConfig, updateLastMessages]);
 
     useEffect(() => {
         socket.on('receiveMessage', (message: Message) => {
@@ -115,7 +154,7 @@ const ChatTest: React.FC = () => {
         return () => {
             socket.off('receiveMessage');
         };
-    }, []);
+    }, [updateLastMessage]);
 
     const scrollToBottom = () => {
         if (messagesEndRef.current) {
@@ -168,33 +207,6 @@ const ChatTest: React.FC = () => {
         setSelectedUser(selected);
     };
 
-    // Update the last message for each user in the list
-    const updateLastMessages = (newMessages: Message[]) => {
-        const lastMessageMap: { [key: string]: Message } = { ...lastMessages };
-
-        newMessages.forEach((msg) => {
-            const userId =
-                msg.user_id_source === userId1
-                    ? msg.user_id_destinataire
-                    : msg.user_id_source;
-            lastMessageMap[userId] = msg;
-        });
-
-        setLastMessages(lastMessageMap);
-    };
-
-    // Update last message for a specific user
-    const updateLastMessage = (message: Message) => {
-        const userId =
-            message.user_id_source === userId1
-                ? message.user_id_destinataire
-                : message.user_id_source;
-        setLastMessages((prevLastMessages) => ({
-            ...prevLastMessages,
-            [userId]: message
-        }));
-    };
-
     const getLastMessageForUser = (userId: string) => {
         if (lastMessages[userId]) {
             return lastMessages[userId].message;
@@ -242,7 +254,7 @@ const ChatTest: React.FC = () => {
                             key={msg.id}
                             className={`flex items-start gap-2 p-2 ${msg.user_id_source === userId2 ? 'justify-start' : 'justify-end'}`}
                         >
-                            {msg.user_id_source == userId2 && (
+                            {msg.user_id_source === userId2 && (
                                 <img
                                     src={
                                         users.find(
