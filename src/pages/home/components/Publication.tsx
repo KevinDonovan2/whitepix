@@ -16,7 +16,13 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Share2, MessageCircleMore, ThumbsUp, Trash2 } from 'lucide-react';
+import {
+    Share2,
+    MessageCircleMore,
+    ThumbsUp,
+    Trash2,
+    Save
+} from 'lucide-react';
 
 type Publication = {
     id: number;
@@ -91,16 +97,27 @@ function Publication() {
                                 </CardDescription>
                             </div>
                         </div>
-                        <Button
-                            variant="ghost"
-                            className="text-red-500"
-                            onClick={() =>
-                                deleteMutation.mutate(publication.id)
-                            }
-                            disabled={deleteMutation.isPending}
-                        >
-                            <Trash2 className="w-5 h-5" />
-                        </Button>
+                        <div className="flex flex-row gap-2">
+                            <Button
+                                className="text-white bg-gray-500 rounded-[50%] flex justify-center items-center p-2 "
+                                onClick={() =>
+                                    deleteMutation.mutate(publication.id)
+                                }
+                                disabled={deleteMutation.isPending}
+                            >
+                                <Save />
+                            </Button>
+                            <Button
+                                variant="ghost"
+                                className="text-red-500 bg-gray-200 rounded-[50%] flex justify-center items-center p-2"
+                                onClick={() =>
+                                    deleteMutation.mutate(publication.id)
+                                }
+                                disabled={deleteMutation.isPending}
+                            >
+                                <Trash2 />
+                            </Button>
+                        </div>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <p className="text-md">{publication.description}</p>

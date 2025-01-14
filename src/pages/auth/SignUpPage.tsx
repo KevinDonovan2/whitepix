@@ -1,17 +1,12 @@
-import { ModeToggle } from '../../components/mode-toggle';
-import SignUp from '@/features/auth/SignUp';
-import { ThemeProvider } from '@/components/theme-provider';
+import SignUp from './components/SignUp';
 
 function SignUpPage() {
     return (
-        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-            <ModeToggle />
-            <div className="grid grid-cols-1 justify-content-center mt-4">
-                <div className="flex items-center justify-center">
-                    <SignUp />
-                </div>
+        <div className="grid grid-cols-1 justify-content-center mt-6">
+            <div className="flex items-center justify-center">
+                <SignUp />
             </div>
-        </ThemeProvider>
+        </div>
     );
 }
 

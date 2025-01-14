@@ -28,9 +28,8 @@ function NavBar() {
         <div className="secondary text-black p-3 mt-4 ml-4 mr-4 rounded-2xl shadow-lg">
             <div className="container flex justify-between ">
                 <div>
-                    <Button
-                        variant="ghost"
-                        className="p-0 flex flex-row items-center"
+                    <div
+                        className="p-0 flex flex-row items-center hover:background-white cursor-pointer"
                         onClick={handleHome}
                     >
                         <img
@@ -39,10 +38,14 @@ function NavBar() {
                             className="h-10 w-10 rounded-full"
                         />
                         <div className="ml-4 font-bold text-lg">
-                            <span className="text-slate-500">WHITE</span>
-                            <span className="text-green-700">PIX</span>
+                            <span className="text-slate-700 bg-gray-200 rounded-l-xl pl-2">
+                                WHITE
+                            </span>
+                            <span className="text-white bg-black rounded-r-xl pr-2">
+                                PIX
+                            </span>
                         </div>
-                    </Button>
+                    </div>
                 </div>
                 <div className="space-x-12 flex-1 flex justify-center text-sm font-semibold ">
                     <Link
@@ -82,9 +85,8 @@ function NavBar() {
                     >
                         <Bell />
                     </Button>
-                    <Button
-                        variant="ghost"
-                        className=""
+                    <div
+                        className=" cursor-pointer"
                         onClick={handleProfileClick}
                     >
                         <img
@@ -95,7 +97,7 @@ function NavBar() {
                             alt="Profile"
                             className="h-10 w-10 rounded-full"
                         />
-                    </Button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -7,12 +7,22 @@ import { useEffect, useState } from 'react';
 
 function Dashboard() {
     const [userPhoto, setUserPhoto] = useState<string | null>(null);
+    const [userName, setName] = useState<string | null>(null);
     useEffect(() => {
         const storedPhoto = localStorage.getItem('userPhoto');
         if (storedPhoto && storedPhoto !== 'null') {
             setUserPhoto(storedPhoto);
         } else {
             setUserPhoto(null);
+        }
+    }, []);
+
+    useEffect(() => {
+        const storedName = localStorage.getItem('userName');
+        if (storedName && storedName !== 'null') {
+            setName(storedName);
+        } else {
+            setName('Pas de Nom');
         }
     }, []);
 
@@ -57,14 +67,15 @@ function Dashboard() {
                         <div className="flex flex-row gap-4">
                             <div>
                                 <label
-                                    htmlFor="message"
+                                    htmlFor="photo"
                                     className="block text-sm font-medium"
                                 >
-                                    Current Password
+                                    Photo
                                 </label>
                                 <Input
-                                    id="message"
-                                    placeholder="*****"
+                                    id="photo"
+                                    type=""
+                                    placeholder="url_image from drive upload"
                                     className="mt-1"
                                 />
                             </div>
@@ -73,14 +84,27 @@ function Dashboard() {
                                     htmlFor="message"
                                     className="block text-sm font-medium"
                                 >
-                                    New Password
+                                    Phone number
                                 </label>
                                 <Input
                                     id="message"
-                                    placeholder="*****"
+                                    placeholder="+261*****"
                                     className="mt-1"
                                 />
                             </div>
+                        </div>
+                        <div>
+                            <label
+                                htmlFor="message"
+                                className="block text-sm font-medium"
+                            >
+                                Password confirm all change
+                            </label>
+                            <Input
+                                id="message"
+                                placeholder="*****"
+                                className="mt-1"
+                            />
                         </div>
                         <div className="flex justify-center">
                             <Button type="submit" className="w-full md:w-auto">
@@ -88,7 +112,7 @@ function Dashboard() {
                             </Button>
                         </div>
                     </form>
-                    <div>
+                    <div className="flex flex-row justify-center items-center gap-4">
                         <img
                             src={
                                 userPhoto ||
@@ -97,6 +121,20 @@ function Dashboard() {
                             alt=""
                             className="h-[40vh] rounded-lg"
                         />
+                        <ul className="space-y-2">
+                            <li className="p-2 border-2 border-amber-400 rounded-3xl">
+                                {userName}
+                            </li>
+                            <li className="p-2 border-2 border-amber-400 rounded-3xl">
+                                0339933399
+                            </li>
+                            <li className="p-2 border-2 border-amber-400 rounded-3xl">
+                                email@bob.com
+                            </li>
+                            <li className="p-2 border-2 border-amber-400 rounded-3xl">
+                                Dte de creation du compte
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

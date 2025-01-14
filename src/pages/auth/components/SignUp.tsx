@@ -61,7 +61,7 @@ function SignUp() {
     };
 
     return (
-        <Card className="w-[350px] shadow-xl">
+        <Card className="w-[500px] shadow-xl">
             <CardHeader>
                 <CardTitle>Sign up</CardTitle>
                 <CardDescription>This is a basic sign up page</CardDescription>
@@ -69,19 +69,29 @@ function SignUp() {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <CardContent>
                     <div className="grid w-full gap-4">
-                        <div className="flex flex-col items-start space-y-2">
-                            <Label htmlFor="name">Name</Label>
-                            <Input
-                                id="name"
-                                type="text"
-                                placeholder="Name"
-                                {...register('name')}
-                            />
-                            {errors.name && (
-                                <p className="text-red-500 text-sm">
-                                    {errors.name.message}
-                                </p>
-                            )}
+                        <div className="flex flex-row gap-4">
+                            <div>
+                                <Label htmlFor="name">First Name</Label>
+                                <Input
+                                    id="name"
+                                    type="text"
+                                    placeholder="Name"
+                                    {...register('name')}
+                                />
+                                {errors.name && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.name.message}
+                                    </p>
+                                )}
+                            </div>
+                            <div>
+                                <Label htmlFor="lastName">Last Name</Label>
+                                <Input
+                                    id="lastName"
+                                    type="text"
+                                    placeholder="Last Name"
+                                />
+                            </div>
                         </div>
                         <div className="flex flex-col items-start space-y-2">
                             <Label htmlFor="email">Email</Label>
@@ -116,6 +126,9 @@ function SignUp() {
                 <CardFooter className="flex flex-col gap-4">
                     <Button className="w-full font-bold" type="submit">
                         Sign up
+                    </Button>
+                    <Button className="w-full font-bold" type="submit">
+                        Sign up with Google
                     </Button>
                     <div>
                         Have an account?{' '}

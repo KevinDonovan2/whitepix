@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CreatePublication from '@/features/landingPage/CreatePublication';
-import Publication from '@/features/landingPage/Publication';
+import CreatePublication from './components/CreatePublication';
+import Publication from './components/Publication';
 import NavBar from '@/layout/NavBar';
 import SideRightPage from './SideRightPage';
 import SideLeftPage from './SideLeftPage';
@@ -9,45 +9,13 @@ import SideLeftPage from './SideLeftPage';
 function HomePage() {
     const navigate = useNavigate();
 
-    const SESSION_TIMEOUT = 100 * 60 * 1000;
-
     useEffect(() => {
         const token = localStorage.getItem('token');
-        const loginTime = localStorage.getItem('loginTime');
 
-        if (!token || !loginTime) {
+        if (!token) {
             navigate('/');
-            return;
         }
-
-        const currentTime = new Date().getTime();
-        const timeSinceLogin = currentTime - parseInt(loginTime, 10);
-
-        if (timeSinceLogin > SESSION_TIMEOUT) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('loginTime');
-            navigate('/');
-        } else {
-            const resetLoginTime = () => {
-                localStorage.setItem(
-                    'loginTime',
-                    new Date().getTime().toString()
-                );
-            };
-
-            const events = ['click', 'mousemove', 'keydown'];
-            events.forEach((event) =>
-                window.addEventListener(event, resetLoginTime)
-            );
-
-            return () => {
-                events.forEach((event) =>
-                    window.removeEventListener(event, resetLoginTime)
-                );
-            };
-        }
-    }, [navigate, SESSION_TIMEOUT]);
-
+    }, [navigate]);
     return (
         <div className="h-screen primary flex flex-col">
             <NavBar />

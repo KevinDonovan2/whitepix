@@ -6,13 +6,13 @@ import LoginPage from './pages/auth/LoginPage';
 import SignUpPage from './pages/auth/SignUpPage';
 import HomePage from './pages/home/HomePage';
 import './index.css';
-import PrivateRoute from './features/auth/PrivateRoute';
+import PrivateRoute from './pages/auth/components/PrivateRoute';
 import NotFoundPage from './pages/NotFoundPage';
 import Dashboard from './pages/dashboard/Dashboard';
 import ChatPage from './pages/chat/ChatPage';
 import ContactPage from './pages/contact/ContactPage';
 import FriendPage from './pages/friend/FriendPage';
-
+import LoadingPage from './components/LoadingPage';
 const queryClient = new QueryClient();
 
 const ROUTER = createBrowserRouter([
@@ -38,6 +38,10 @@ const ROUTER = createBrowserRouter([
             {
                 path: '/chat',
                 element: <ChatPage />
+            },
+            {
+                path: '/nothing',
+                element: <LoadingPage />
             },
             {
                 path: '/users',
