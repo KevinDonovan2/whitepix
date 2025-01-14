@@ -99,24 +99,23 @@ function Publication() {
                         </div>
                         <div className="flex flex-row gap-2">
                             <Button
-                                variant="ghost"
-                                className="text-white bg-gray-500 rounded-3xl"
+                                className="text-white bg-gray-500 rounded-[50%] flex justify-center items-center p-2 "
                                 onClick={() =>
                                     deleteMutation.mutate(publication.id)
                                 }
                                 disabled={deleteMutation.isPending}
                             >
-                                <Save className="w-5 h-5" />
+                                <Save />
                             </Button>
                             <Button
                                 variant="ghost"
-                                className="text-red-500 bg-gray-200 rounded-3xl"
+                                className="text-red-500 bg-gray-200 rounded-[50%] flex justify-center items-center p-2"
                                 onClick={() =>
                                     deleteMutation.mutate(publication.id)
                                 }
                                 disabled={deleteMutation.isPending}
                             >
-                                <Trash2 className="w-5 h-5" />
+                                <Trash2 />
                             </Button>
                         </div>
                     </CardHeader>

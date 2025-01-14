@@ -4,17 +4,16 @@ import { io } from 'socket.io-client';
 import ChatBottombar from '@/components/chat/ChatBottombar';
 import ChatTopbar from '@/components/chat/ChatTopbar';
 
-// Custom hook to determine if the device is mobile
 const useIsMobile = () => {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth <= 768); // Example breakpoint for mobile
+            setIsMobile(window.innerWidth <= 768);
         };
 
         window.addEventListener('resize', handleResize);
-        handleResize(); // Check on mount
+        handleResize();
 
         return () => {
             window.removeEventListener('resize', handleResize);
@@ -43,6 +42,9 @@ interface User {
 const ChatTest: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [users, setUsers] = useState<User[]>([]);
+    const [lastMessages, setLastMessages] = useState<{
+        [key: string]: Message;
+    }>({});
     const [userId2, setUserId2] = useState<string | null>(null);
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
     const userId1 = localStorage.getItem('userId');
@@ -58,8 +60,6 @@ const ChatTest: React.FC = () => {
     );
 
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
-
-    // Use the isMobile hook
     const isMobile = useIsMobile();
 
     useEffect(() => {
@@ -88,7 +88,10 @@ const ChatTest: React.FC = () => {
                     ...axiosConfig,
                     params: { userId1, userId2 }
                 })
-                .then((response) => setMessages(response.data))
+                .then((response) => {
+                    setMessages(response.data);
+                    updateLastMessages(response.data);
+                })
                 .catch((error) =>
                     console.error(
                         'Erreur lors du chargement des messages:',
@@ -103,6 +106,7 @@ const ChatTest: React.FC = () => {
     useEffect(() => {
         socket.on('receiveMessage', (message: Message) => {
             setMessages((prevMessages) => [...prevMessages, message]);
+            updateLastMessage(message);
         });
 
         return () => {
@@ -123,25 +127,23 @@ const ChatTest: React.FC = () => {
     const sendMessage = (newMessage: Message) => {
         if (!newMessage.message || !userId2) return;
 
-        // Create a new message object
         const messageData = {
             userIdSource: userId1,
             userIdDestinataire: userId2,
             message: newMessage.message
         };
 
-        // Add the new message to local state immediately
         const tempMessage: Message = {
-            id: Date.now(), // Temporary ID
+            id: Date.now(),
             user_id_source: userId1!,
             user_id_destinataire: userId2,
             message: newMessage.message,
-            created_at: new Date().toISOString() // Use current time
+            created_at: new Date().toISOString()
         };
 
-        setMessages((prevMessages) => [...prevMessages, tempMessage]); // Update local state
+        setMessages((prevMessages) => [...prevMessages, tempMessage]);
+        updateLastMessage(tempMessage);
 
-        // Send message to server
         axios
             .post('http://localhost:8081/messages', messageData, axiosConfig)
             .then((response) => {
@@ -159,6 +161,40 @@ const ChatTest: React.FC = () => {
         setSelectedUser(selected);
     };
 
+    // Update the last message for each user in the list
+    const updateLastMessages = (newMessages: Message[]) => {
+        const lastMessageMap: { [key: string]: Message } = { ...lastMessages };
+
+        newMessages.forEach((msg) => {
+            const userId =
+                msg.user_id_source === userId1
+                    ? msg.user_id_destinataire
+                    : msg.user_id_source;
+            lastMessageMap[userId] = msg;
+        });
+
+        setLastMessages(lastMessageMap);
+    };
+
+    // Update last message for a specific user
+    const updateLastMessage = (message: Message) => {
+        const userId =
+            message.user_id_source === userId1
+                ? message.user_id_destinataire
+                : message.user_id_source;
+        setLastMessages((prevLastMessages) => ({
+            ...prevLastMessages,
+            [userId]: message
+        }));
+    };
+
+    const getLastMessageForUser = (userId: string) => {
+        if (lastMessages[userId]) {
+            return lastMessages[userId].message;
+        }
+        return 'Pas de message';
+    };
+
     return (
         <div className="flex h-[80vh]">
             <div className="w-1/4 bg-white p-4 rounded-l-lg">
@@ -167,18 +203,25 @@ const ChatTest: React.FC = () => {
                     {users.map((user) => (
                         <li
                             key={user.id}
-                            className={`flex items-center p-2 cursor-pointer rounded-lg ${userId2 === user.id ? 'bg-blue-300' : 'bg-gray-100'}`}
+                            className={`flex flex-col items-start p-2 cursor-pointer rounded-lg ${userId2 === user.id ? 'bg-blue-300' : 'bg-gray-100'}`}
                             onClick={() => selectUser(user.id)}
                         >
-                            <img
-                                src={
-                                    user.photo ||
-                                    'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
-                                }
-                                alt={user.name}
-                                className="w-10 h-10 rounded-full mr-3"
-                            />
-                            <span>{user.name}</span>
+                            <div className="flex items-center">
+                                <img
+                                    src={
+                                        user.photo ||
+                                        'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
+                                    }
+                                    alt={user.name}
+                                    className="w-10 h-10 rounded-full mr-3"
+                                />
+                                <div className="flex flex-col">
+                                    <span>{user.name}</span>
+                                    <span className="text-sm text-gray-500">
+                                        {getLastMessageForUser(user.id)}
+                                    </span>
+                                </div>
+                            </div>
                         </li>
                     ))}
                 </ul>
@@ -224,7 +267,6 @@ const ChatTest: React.FC = () => {
                     ))}
                     <div ref={messagesEndRef} />
                 </div>
-
                 <ChatBottombar sendMessage={sendMessage} isMobile={isMobile} />
             </div>
         </div>

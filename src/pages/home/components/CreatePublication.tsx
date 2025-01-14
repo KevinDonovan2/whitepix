@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Send, ImageDown, File } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { EmojiPicker } from '@/components/emoji-picker';
 
 type Publication = {
     id?: number;
@@ -81,12 +82,22 @@ export default function CreatePublication() {
     return (
         <div className="p-4 bg-white rounded-lg shadow-md mx-auto secondary shadow-lg">
             <h2 className="text-lg font-semibold mb-4">Create a Publication</h2>
-            <Textarea
-                placeholder="What's on your mind?"
-                className="mb-4"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-            />
+            <div className="relative flex-grow">
+                <Textarea
+                    placeholder="What's on your mind?"
+                    className="mb-4"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
+                <div className="absolute right-2 bottom-1">
+                    <EmojiPicker
+                        onChange={(value) =>
+                            setDescription((prev) => prev + value)
+                        }
+                    />
+                </div>
+            </div>
+
             <div className="flex flex-row gap-4">
                 <Button
                     onClick={handleSubmit}

@@ -34,7 +34,7 @@ export default function Contact() {
 
     return (
         <Card className="w-full flex flex-row">
-            <div>
+            <div className="w-1/2">
                 <img
                     src="image.jpg"
                     className="w-full h-[80vh] overflow-hidden rounded-l-lg"
@@ -44,7 +44,8 @@ export default function Contact() {
             <div className="w-1/2 mx-auto p-6 ">
                 <h1 className="text-3xl font-bold text-center ">Contact Us</h1>
                 <p className="text-sm text-muted-foreground text-center mb-4">
-                    If you have a reclamation or something like that text here
+                    If you have a reclamation or something like that , text here
+                    😄
                 </p>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                     <div>
