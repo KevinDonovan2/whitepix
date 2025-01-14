@@ -34,16 +34,16 @@
     0% {
         margin-left: 0;
     }
-    25%{
+    25% {
         margin-left: -800px;
     }
-    50%{
+    50% {
         margin-left: -1600px;
     }
     75% {
         margin-left: -800px;
     }
-    100%{
+    100% {
         margin-left: 0;
     }
 }
@@ -52,25 +52,23 @@
     0%,
     100% {
         transform: translate(0, -30px);
-        
     }
     50% {
         transform: translate(0, 5px);
-        
     }
     0% {
         margin-left: 0;
     }
-    25%{
+    25% {
         margin-left: -800px;
     }
-    50%{
+    50% {
         margin-left: -1600px;
     }
     75% {
         margin-left: -800px;
     }
-    100%{
+    100% {
         margin-left: 0;
     }
 }
