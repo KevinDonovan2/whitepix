@@ -25,7 +25,7 @@ export default function Friend() {
     useEffect(() => {
         if (token) {
             axios
-                .get('http://localhost:8081/users', axiosConfig)
+                .get('https://whitepix-api.onrender.com/users', axiosConfig)
                 .then((response) => {
                     setUsers(response.data);
                 })

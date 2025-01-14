@@ -40,7 +40,7 @@ function Login() {
     const onSubmit = async (data: LoginFormData) => {
         try {
             const response = await axios.post(
-                'http://localhost:8081/users/login',
+                'https://whitepix-api.onrender.com/users/login',
                 data
             );
             console.log('Login successful:', response.data);

@@ -43,7 +43,7 @@ export default function CreatePublication() {
     > = useMutation({
         mutationFn: async (newPublication: Partial<Publication>) => {
             return axios.post<Publication>(
-                'http://localhost:8081/publications',
+                'https://whitepix-api.onrender.com/publications',
                 newPublication
             );
         },

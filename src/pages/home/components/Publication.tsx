@@ -40,12 +40,14 @@ type Publication = {
 type FetchPublicationsResponse = Publication[];
 
 async function fetchPublications(): Promise<FetchPublicationsResponse> {
-    const response = await axios.get('http://localhost:8081/publications');
+    const response = await axios.get(
+        'https://whitepix-api.onrender.com/publications'
+    );
     return response.data;
 }
 
 async function deletePublication(id: number): Promise<void> {
-    await axios.delete(`http://localhost:8081/publications/${id}`);
+    await axios.delete(`https://whitepix-api.onrender.com/publications/${id}`);
 }
 
 function Publication() {

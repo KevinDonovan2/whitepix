@@ -23,7 +23,7 @@ const useIsMobile = () => {
     return isMobile;
 };
 
-const socket = io('http://localhost:8081');
+const socket = io('https://whitepix-api.onrender.com');
 
 interface Message {
     id: number;
@@ -65,7 +65,7 @@ const ChatTest: React.FC = () => {
     useEffect(() => {
         if (token) {
             axios
-                .get('http://localhost:8081/users', axiosConfig)
+                .get('https://whitepix-api.onrender.com/users', axiosConfig)
                 .then((response) => {
                     const filteredUsers = response.data.filter(
                         (user: User) => user.id !== userId1
@@ -84,10 +84,13 @@ const ChatTest: React.FC = () => {
     useEffect(() => {
         if (userId2 && token) {
             axios
-                .get('http://localhost:8081/messages/conversation', {
-                    ...axiosConfig,
-                    params: { userId1, userId2 }
-                })
+                .get(
+                    'https://whitepix-api.onrender.com/messages/conversation',
+                    {
+                        ...axiosConfig,
+                        params: { userId1, userId2 }
+                    }
+                )
                 .then((response) => {
                     setMessages(response.data);
                     updateLastMessages(response.data);
@@ -145,7 +148,11 @@ const ChatTest: React.FC = () => {
         updateLastMessage(tempMessage);
 
         axios
-            .post('http://localhost:8081/messages', messageData, axiosConfig)
+            .post(
+                'https://whitepix-api.onrender.com/messages',
+                messageData,
+                axiosConfig
+            )
             .then((response) => {
                 socket.emit('sendMessage', response.data);
             })
