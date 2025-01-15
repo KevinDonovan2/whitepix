@@ -24,8 +24,9 @@ export default function Friend() {
 
     useEffect(() => {
         if (token) {
+            const baseUrl = import.meta.env.VITE_API_BASE_URL;
             axios
-                .get('https://whitepix-api.onrender.com/users', axiosConfig)
+                .get(`${baseUrl}/users`, axiosConfig)
                 .then((response) => {
                     setUsers(response.data);
                 })
@@ -45,7 +46,7 @@ export default function Friend() {
 
     return (
         <div className=" w-full h-full rounded-r-lg p-6">
-            <h2 className="text-lg font-semibold mb-4">Friend List</h2>
+            <h2 className="text-lg font-semibold mb-4">Friend suggestion</h2>
             <div className="grid grid-cols-4 gap-4">
                 {users.length > 0 ? (
                     users.map((user) => (

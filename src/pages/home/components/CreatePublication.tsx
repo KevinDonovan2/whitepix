@@ -36,6 +36,7 @@ export default function CreatePublication() {
         setUserId(storedId ? parseInt(storedId) : undefined);
     }, []);
 
+    const baseUrl = import.meta.env.VITE_API_BASE_URL;
     const mutation: UseMutationResult<
         AxiosResponse<Publication>,
         Error,
@@ -43,7 +44,7 @@ export default function CreatePublication() {
     > = useMutation({
         mutationFn: async (newPublication: Partial<Publication>) => {
             return axios.post<Publication>(
-                'https://whitepix-api.onrender.com/publications',
+                `${baseUrl}/publications`,
                 newPublication
             );
         },

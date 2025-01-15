@@ -39,8 +39,9 @@ function Login() {
 
     const onSubmit = async (data: LoginFormData) => {
         try {
+            const baseUrl = import.meta.env.VITE_API_BASE_URL;
             const response = await axios.post(
-                'https://whitepix-api.onrender.com/users/login',
+                `${baseUrl}/users/users/login`,
                 data
             );
             console.log('Login successful:', response.data);
@@ -132,12 +133,12 @@ function Login() {
                         type="button"
                         onClick={handleSignUpClick}
                     >
-                        Sign up with Google
+                        Sign up
                     </Button>
                     <div>
                         Need an account? Create one
                         <a href="/signup" className="text-blue-500">
-                            {' '}
+                            {}
                             sign up
                         </a>
                     </div>

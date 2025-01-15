@@ -40,14 +40,13 @@ type Publication = {
 type FetchPublicationsResponse = Publication[];
 
 async function fetchPublications(): Promise<FetchPublicationsResponse> {
-    const response = await axios.get(
-        'https://whitepix-api.onrender.com/publications'
-    );
+    const baseUrl = import.meta.env.VITE_API_BASE_URL;
+    const response = await axios.get(`${baseUrl}/publications`);
     return response.data;
 }
-
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 async function deletePublication(id: number): Promise<void> {
-    await axios.delete(`https://whitepix-api.onrender.com/publications/${id}`);
+    await axios.delete(`${baseUrl}/publications/${id}`);
 }
 
 function Publication() {

@@ -41,14 +41,12 @@ function SignUp() {
 
     const onSubmit = async (data: SignUpFormData) => {
         try {
-            const response = await axios.post(
-                'https://whitepix-api.onrender.com/users',
-                {
-                    name: data.name,
-                    email: data.email,
-                    password: data.password
-                }
-            );
+            const baseUrl = import.meta.env.VITE_API_BASE_URL;
+            const response = await axios.post(`${baseUrl}/users`, {
+                name: data.name,
+                email: data.email,
+                password: data.password
+            });
             console.log('Sign up successful:', response.data);
             navigate('/home');
         } catch (error) {
