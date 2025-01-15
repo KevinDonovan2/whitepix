@@ -38,12 +38,9 @@ function Login() {
     });
 
     const onSubmit = async (data: LoginFormData) => {
+        const baseUrl = import.meta.env.VITE_API_BASE_URL;
         try {
-            const baseUrl = import.meta.env.VITE_API_BASE_URL;
-            const response = await axios.post(
-                `${baseUrl}/users/users/login`,
-                data
-            );
+            const response = await axios.post(`${baseUrl}/users/login`, data);
             console.log('Login successful:', response.data);
 
             localStorage.setItem('token', response.data.token);
